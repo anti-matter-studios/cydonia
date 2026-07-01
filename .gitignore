@@ -1,0 +1,12 @@
+node_modules
+dist
+dist-ssr
+storybook-static
+debug-storybook.log
+playwright-report
+test-results
+coverage
+.DS_Store
+.env
+.env.local
+.env.*.local

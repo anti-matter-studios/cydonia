@@ -1,0 +1,6 @@
+<component name="CopyrightManager">
+  <copyright>
+    <option name="notice" value="Copyright © &amp;#36;originalComment.match(&quot;Copyright © (\d+)&quot;, 1, &quot;-&quot;, &quot;&amp;#36;today.year&quot;)&amp;#36;today.year Anti-Matter Studios.&#10;This product is released under the MIT licence." />
+    <option name="myName" value="Anti-Matter Studios" />
+  </copyright>
+</component>
