@@ -1,0 +1,48 @@
+/*
+ * Copyright © 2026 Anti-Matter Studios.
+ * This product is released under the MIT licence.
+ */
+
+
+@theme {
+    /* Composites of the space-style background. */
+    --space-background-noise-image: url("/noise.svg");
+    --space-background-linear-gradient: linear-gradient(
+            135deg,
+            var(--color-space-600) 0%,
+            var(--color-space-700) 30%,
+            var(--color-space-800) 78%,
+            var(--color-space-900) 100%
+    );
+
+    /* Composites of the panel-style background. */
+    --panel-background-noise-image: var(--space-background-noise-image);
+    --panel-background-linear-gradient: linear-gradient(
+            135deg,
+            var(--color-space-600) 0%,
+            var(--color-space-700) 30%,
+            var(--color-space-800) 78%,
+            var(--color-space-800) 100%
+    );
+
+    /* Composites of the panel-style border. */
+    --panel-border-gradient: linear-gradient(
+            135deg,
+            var(--color-space-400) 0%,
+            var(--color-space-600) 25%,
+            var(--color-space-800) 70%,
+            var(--color-space-950) 100%
+    );
+
+    /** Space-style background for the main viewport. */
+    --space-background-gradient: var(--space-background-noise-image), var(--space-background-linear-gradient);;
+    --space-background-blend: soft-light, screen, normal;
+
+    /** Panel-style background for the main viewport. */
+    --panel-background-gradient: var(--panel-background-noise-image), var(--panel-background-linear-gradient);;
+    --panel-background-blend: soft-light, screen, normal;
+
+    /** Panel-style border for the main viewport. */
+    --panel-border: 1px solid transparent;
+    --panel-border-image: var(--panel-border-gradient);
+}
