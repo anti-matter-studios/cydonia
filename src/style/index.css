@@ -3,10 +3,13 @@
  * This product is released under the MIT licence.
  */
 
-@import "tailwindcss";
-@import "tailwindcss/theme";
-/*@import "tailwindcss/preflight";*/
-@import "tailwindcss/utilities";
-
 @import "theme/default.css";
 @import "components.css";
+
+@import "tailwindcss";
+
+@layer base {
+    :root {
+        color: var(--color-text-primary);
+    }
+}

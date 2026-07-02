@@ -12,7 +12,7 @@
             var(--color-space-600) 0%,
             var(--color-space-700) 30%,
             var(--color-space-800) 78%,
-            var(--color-space-900) 100%
+            var(--color-space-950) 100%
     );
 
     /* Composites of the panel-style background. */
