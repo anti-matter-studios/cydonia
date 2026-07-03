@@ -1,0 +1,16 @@
+designation: Mercury
+colours:
+  light: [0.72, 0.69, 0.62]
+  shaded: [0.34, 0.32, 0.3]
+scale: 0.7
+orbitalParameters:
+  epochTTJD: 2451545
+  perihelionDistanceAU: 0.3074977516
+  eccentricity: 0.1
+  inclinationDegrees: 7.00497902
+  longitudeOfAscendingNodeDegrees: 48.33076593
+  argumentOfPerihelionDegrees: 29.12703035
+  timeOfPerihelionPassageTTJD: 2451502.287819
+  semiMajorAxisAU: 0.38709927
+  meanAnomalyDegrees: 174.79252722
+  orbitalPeriodDays: 87.969351

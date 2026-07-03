@@ -1,0 +1,16 @@
+designation: Earth
+colours:
+  light: [0.35, 0.67, 0.9]
+  shaded: [0.08, 0.2, 0.42]
+scale: 1.2
+orbitalParameters:
+  epochTTJD: 2451545
+  perihelionDistanceAU: 0.9832913364
+  eccentricity: 0.01671123
+  inclinationDegrees: -0.00001531
+  longitudeOfAscendingNodeDegrees: 0
+  argumentOfPerihelionDegrees: 102.93768193
+  timeOfPerihelionPassageTTJD: 2451182.249596
+  semiMajorAxisAU: 1.00000261
+  meanAnomalyDegrees: 357.52688973
+  orbitalPeriodDays: 365.259647

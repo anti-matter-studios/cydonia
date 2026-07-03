@@ -3,8 +3,8 @@
  * This product is released under the MIT licence.
  */
 
-@import "theme/default.css";
-@import "components.css";
+@import "./theme/default.css";
+@import "./components.css";
 
 @import "tailwindcss";
 

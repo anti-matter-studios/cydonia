@@ -1,0 +1,16 @@
+designation: Mars
+colours:
+  light: [0.87, 0.44, 0.26]
+  shaded: [0.38, 0.14, 0.1]
+scale: 0.9
+orbitalParameters:
+  epochTTJD: 2451545
+  perihelionDistanceAU: 1.3814047841
+  eccentricity: 0.0933941
+  inclinationDegrees: 1.84969142
+  longitudeOfAscendingNodeDegrees: 49.55953891
+  argumentOfPerihelionDegrees: 286.4968315
+  timeOfPerihelionPassageTTJD: 2451507.997272
+  semiMajorAxisAU: 1.52371034
+  meanAnomalyDegrees: 19.39019754
+  orbitalPeriodDays: 686.995683

@@ -4,4 +4,4 @@
  */
 
 
-@import "./components/backgrounds.css";
+export { useSystemPeekerTimeManager } from "./time-handler";

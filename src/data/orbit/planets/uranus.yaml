@@ -1,0 +1,16 @@
+designation: Uranus
+colours:
+  light: [0.64, 0.9, 0.92]
+  shaded: [0.2, 0.47, 0.55]
+scale: 1.8
+orbitalParameters:
+  epochTTJD: 2451545
+  perihelionDistanceAU: 18.2823338434
+  eccentricity: 0.04725744
+  inclinationDegrees: 0.77263783
+  longitudeOfAscendingNodeDegrees: 74.01692503
+  argumentOfPerihelionDegrees: 96.93735127
+  timeOfPerihelionPassageTTJD: 2439404.769273
+  semiMajorAxisAU: 19.18916464
+  meanAnomalyDegrees: 142.28382821
+  orbitalPeriodDays: 30716.653585
