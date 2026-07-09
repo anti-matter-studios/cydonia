@@ -1,0 +1,48 @@
+designation = "699"
+name = "Saturn"
+
+[mesh]
+geometry="sphere"
+segments=8
+radius=0.35
+
+material="gradient"
+from-colour=[0.9, 0.76, 0.5]
+to-colour=[0.48, 0.36, 0.2]
+
+[orbit]
+epoch = 2461228
+eccentricity = 5.534078881964554e-2
+meanAnomaly = 281.9474043151601
+semiMajorAxis = 9.542008761368852
+orbitalPeriod = 10764.5551788061
+
+[orbit.units]
+time = "julian-date-barycentric-dynamical-time-days"
+distance = "astronomical-units"
+angle = "degrees"
+
+[orbit.angles]
+inclination = 2.488426736741216
+longitudeOfAscendingNode = 113.6740301908658
+argumentOfPerihelion = 338.5286749687725
+
+[source]
+time = "2026-07-06T16:03:27.490807178"
+name = "NASA/JPL Horizons APIv1.2"
+
+[source.data]
+dateJD = 2.461228e+6
+dateUTC = "A.D. 2026-Jul-06 12:00:00.0000 TDB"
+EC = 5.534078881964554e-2
+QR = 9.01394646959073e+0
+IN = 2.488426736741216e+0
+OM = 1.136740301908658e+2
+W = 3.385286749687725e+2
+Tp = 2.4635618929808293e+6
+N = 3.344309114683992e-2
+MA = 2.819474043151601e+2
+TA = 2.756657335131681e+2
+A = 9.542008761368852e+0
+AD = 1.007007105314698e+1
+PR = 1.07645551788061e+4

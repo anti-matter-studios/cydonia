@@ -1,0 +1,236 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema#",
+    "$id": "https://anti-matter.studio/schemas/data/mesh.schema.json",
+    "description": "Schema used to validate the mesh data provided to render a planet.",
+    "$defs": {
+        "colour-source": {
+            "description": "A colour used in some material.",
+            "oneOf": [
+                {
+                    "type": "string",
+                    "description": "A hexadecimal definition of the colour.",
+                    "pattern": "#?[0-9a-f]{6}"
+                },
+                {
+                    "type": "array",
+                    "description": "An array of three numbers representing the RGB values of the colour.",
+                    "items": {
+                        "type": "number",
+                        "minimum": 0,
+                        "maximum": 1
+                    },
+                    "minItems": 3,
+                    "maxItems": 3
+                }
+            ]
+        },
+        "sphere-geometry": {
+            "type": "object",
+            "description": "Sphere geometry used to render a planet.",
+            "properties": {
+                "geometry": {
+                    "type": "string",
+                    "description": "The type of geometry.",
+                    "enum": ["sphere"]
+                },
+                "radius": {
+                    "type": "number",
+                    "description": "The radius of the sphere.",
+                    "minimum": 0
+                },
+                "segments": {
+                    "type": "integer",
+                    "description": "The number of segments used to render the sphere.",
+                    "minimum": 1,
+                    "maximum": 10
+                }
+            },
+            "additionalProperties": true,
+            "required": ["geometry", "radius", "segments"]
+        },
+        "icosahedron-geometry": {
+            "type": "object",
+            "description": "Icosahedron geometry used to render a planet.",
+            "properties": {
+                "geometry": {
+                    "type": "string",
+                    "description": "The type of geometry.",
+                    "enum": ["icosahedron"]
+                },
+                "radius": {
+                    "type": "number",
+                    "description": "The radius of the mesh",
+                    "minimum": 0
+                },
+                "details": {
+                    "type": "integer",
+                    "description": "The number of subdibisions used to render the icosahedron.",
+                    "minimum": 1,
+                    "maximum": 10
+                }
+            },
+            "additionalProperties": true,
+            "required": ["geometry"]
+        },
+        "octahedron-geometry": {
+            "type": "object",
+            "description": "Octahedron geometry used to render a planet.",
+            "properties": {
+                "geometry": {
+                    "type": "string",
+                    "description": "The type of geometry.",
+                    "enum": ["octahedron"]
+                },
+                "radius":{
+                    "type": "number",
+                    "description": "The radius of the mesh",
+                    "minimum": 0
+                },
+                "details": {
+                    "type": "integer",
+                    "description": "The number of subdibisions used to render the octahedron.",
+                    "minimum": 1,
+                    "maximum": 10
+                }
+            },
+            "additionalProperties": true,
+            "required": ["geometry"]
+        },
+        "minor-planet-geometry": {
+            "type": "object",
+            "description": "Procedural low-poly geometry used to render minor planets.",
+            "properties": {
+                "geometry": {
+                    "type": "string",
+                    "description": "The type of geometry.",
+                    "enum": ["minor-planet"]
+                },
+                "radius": {
+                    "type": "number",
+                    "description": "The base radius of the minor planet.",
+                    "minimum": 0
+                },
+                "details": {
+                    "type": "integer",
+                    "description": "The number of subdivisions used to render the source icosahedron.",
+                    "minimum": 0,
+                    "maximum": 10
+                },
+                "height-scale": {
+                    "type": "number",
+                    "description": "The Simplex height displacement as a fraction of the radius.",
+                    "minimum": 0,
+                    "maximum": 0.5
+                },
+                "noise-scale": {
+                    "type": "number",
+                    "description": "The frequency of the first Simplex noise octave.",
+                    "minimum": 0
+                },
+                "noise-octaves": {
+                    "type": "integer",
+                    "description": "The number of Simplex noise octaves blended into the heightmap.",
+                    "minimum": 1,
+                    "maximum": 8
+                },
+                "seed": {
+                    "type": "integer",
+                    "description": "The deterministic seed used when generating the heightmap."
+                }
+            },
+            "additionalProperties": true,
+            "required": ["geometry"]
+        },
+        "custom-geometry": {
+            "type": "object",
+            "description": "Custom geometry used to render a planet.",
+            "properties": {
+                "geometry": {
+                    "type": "string",
+                    "description": "The type of geometry.",
+                    "enum": ["custom"]
+                },
+                "points": {
+                    "type": "array",
+                    "description": "List of points used to render the custom geometry.",
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "minItems": 3,
+                        "maxItems": 3
+                    }
+                },
+                "indices": {
+                    "type": "array",
+                    "description": "List of indices used to render the custom geometry.",
+                    "items": {
+                        "type": "integer"
+                    }
+                }
+            },
+            "additionalProperties": true,
+            "required": ["geometry", "points"]
+        },
+        "basic-material": {
+            "type": "object",
+            "description": "Basic material used to render the mesh.",
+            "properties": {
+                "material": {
+                    "type": "string",
+                    "description": "The type of material.",
+                    "enum": ["basic"]
+                },
+                "colour": {
+                    "$ref": "#/$defs/colour-source"
+                },
+                "wireframe": {
+                    "type": "boolean",
+                    "description": "Whether to render the mesh as a wireframe."
+                }
+            },
+            "additionalProperties": true,
+            "required": ["material", "colour"]
+        },
+        "gradient-material": {
+            "type": "object",
+            "description": "Material used to render a gradient on the surface.",
+            "properties": {
+                "material": {
+                    "type": "string",
+                    "description": "The type of material.",
+                    "enum": ["gradient"]
+                },
+                "from-colour": {
+                    "$ref": "#/$defs/colour-source"
+                },
+                "to-colour": {
+                    "$ref": "#/$defs/colour-source"
+                },
+                "wireframe": {
+                    "type": "boolean",
+                    "description": "Whether to render the mesh as a wireframe."
+                }
+            },
+            "additionalProperties": true,
+            "required": ["material", "from-colour", "to-colour"]
+        },
+        "geometry": {
+            "oneOf": [
+                {"$ref": "#/$defs/sphere-geometry"},
+                {"$ref": "#/$defs/icosahedron-geometry"},
+                {"$ref": "#/$defs/octahedron-geometry"},
+                {"$ref": "#/$defs/minor-planet-geometry"},
+                {"$ref": "#/$defs/custom-geometry"}
+            ]
+        },
+        "material": {
+            "oneOf": [
+                {"$ref": "#/$defs/basic-material"},
+                {"$ref": "#/$defs/gradient-material"}
+            ]
+        }
+    },
+    "allOf": [{"$ref": "#/$defs/geometry"}, {"$ref": "#/$defs/material"}]
+}

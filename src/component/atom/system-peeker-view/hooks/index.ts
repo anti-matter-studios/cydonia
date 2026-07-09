@@ -4,4 +4,5 @@
  */
 
 
-export { useSystemPeekerTimeManager } from "./time-handler";
+export { useSystemPeekerViewportResizeObserver } from "./resize-observer";
+export { useSystemPeekerAnimation } from "./animation-frame";

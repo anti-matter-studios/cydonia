@@ -19,7 +19,7 @@ export default meta;
 
 export const Interactive: StoryFn = function() {
     return <main className="grid h-dvh w-dvw">
-        <section className="space">
+        <section className="space overflow-hidden">
             <SystemPeekerView className="size-full" />
         </section>
     </main>;

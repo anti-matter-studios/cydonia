@@ -6,7 +6,8 @@
 
 import type { Meta, StoryFn } from "@storybook/react-vite";
 import { useEffect, useRef } from "react";
-import { unixTimestampToJulianDateTT } from "@/lib/renderer/orbit";
+import { brand } from "@/lib/utils";
+import { unixTimestampToJulianDateTDB } from "@/lib/math";
 import SystemPeekerView from "@/component/atom/system-peeker-view";
 
 
@@ -18,13 +19,13 @@ const meta: Meta<typeof Desktop> = {
 };
 export default meta;
 
-export const Desktop: StoryFn = function() {
+export const Desktop: StoryFn<{ useRealtimeView: boolean }> = function({ useRealtimeView }: { useRealtimeView: boolean }) {
     const julianDayRef = useRef<HTMLSpanElement>(null);
 
     useEffect(() => {
         const updateJulianDay = () => {
             if (julianDayRef.current !== null) {
-                julianDayRef.current.textContent = unixTimestampToJulianDateTT(Date.now()).toFixed(6);
+                julianDayRef.current.textContent = unixTimestampToJulianDateTDB(brand(Date.now())).toFixed(6);
             }
 
             frame = window.requestAnimationFrame(updateJulianDay);
@@ -260,7 +261,236 @@ export const Desktop: StoryFn = function() {
                 <h2 className="text-2xl leading-none text-text-primary">System Peeker</h2>
             </header>
 
-            <SystemPeekerView className="size-full" />
+            {useRealtimeView ? <SystemPeekerView className="size-full" /> : <svg
+                className="absolute inset-0 size-full"
+                viewBox="0 0 920 680"
+                preserveAspectRatio="xMidYMid meet"
+                aria-label="Solar system concept map"
+            >
+                <defs>
+                    <radialGradient id="sunGradient">
+                        <stop offset="0%" stopColor="#fff4a8" />
+                        <stop offset="58%" stopColor="#f4d348" />
+                        <stop offset="100%" stopColor="#dfb82f" />
+                    </radialGradient>
+                    <radialGradient id="glowGradient">
+                        <stop offset="0%" stopColor="#f2d34d" stopOpacity="0.45" />
+                        <stop offset="100%" stopColor="#f2d34d" stopOpacity="0" />
+                    </radialGradient>
+                    <filter id="softGlow" x="-80%" y="-80%" width="260%" height="260%">
+                        <feGaussianBlur stdDeviation="12" result="blur" />
+                        <feMerge>
+                            <feMergeNode in="blur" />
+                            <feMergeNode in="SourceGraphic" />
+                        </feMerge>
+                    </filter>
+                </defs>
+
+                <rect width="920" height="680" fill="transparent" />
+
+                <g fill="var(--color-text-primary)" opacity="0.75">
+                    <circle cx="95" cy="118" r="1.7" />
+                    <circle cx="186" cy="84" r="1.2" />
+                    <circle cx="362" cy="72" r="1.4" />
+                    <circle cx="687" cy="104" r="1.3" />
+                    <circle cx="823" cy="202" r="1.4" />
+                    <circle cx="824" cy="494" r="1.7" />
+                    <circle cx="705" cy="596" r="1.3" />
+                    <circle cx="225" cy="601" r="1.4" />
+                    <circle cx="101" cy="527" r="1.3" />
+                    <circle cx="471" cy="153" r="2.5" />
+                    <circle cx="645" cy="521" r="2.6" />
+                    <circle cx="255" cy="364" r="3.2" />
+                </g>
+
+                <g fill="none" stroke="var(--color-border-default)" strokeWidth="1">
+                    <ellipse cx="460" cy="348" rx="92" ry="72" opacity="0.65" />
+                    <ellipse cx="460" cy="348" rx="155" ry="122" opacity="0.62" />
+                    <ellipse cx="460" cy="348" rx="232" ry="184" opacity="0.58" />
+                    <ellipse cx="460" cy="348" rx="306" ry="242" opacity="0.54" />
+                    <ellipse cx="460" cy="348" rx="382" ry="302" opacity="0.5" />
+                    <ellipse
+                        cx="460"
+                        cy="348"
+                        rx="221"
+                        ry="141"
+                        strokeDasharray="12 12"
+                        opacity="0.5"
+                        transform="rotate(-11 460 348)"
+                    />
+                </g>
+
+                <g filter="url(#softGlow)">
+                    <circle cx="460" cy="348" r="70" fill="url(#glowGradient)" />
+                    <circle cx="460" cy="348" r="32" fill="url(#sunGradient)" />
+                </g>
+
+                <g>
+                    <circle cx="489" cy="313" r="7" fill="var(--color-text-primary)" opacity="0.72" />
+                    <text x="503" y="318" fill="var(--color-text-secondary)" fontSize="12">Mercury</text>
+
+                    <circle cx="382" cy="387" r="9" fill="var(--color-warning)" opacity="0.7" />
+                    <text x="395" y="392" fill="var(--color-text-secondary)" fontSize="12">Venus</text>
+
+                    <circle cx="574" cy="302" r="10" fill="var(--color-info)" opacity="0.85" />
+                    <text x="588" y="307" fill="var(--color-text-secondary)" fontSize="12">Earth</text>
+
+                    <circle cx="335" cy="291" r="8" fill="var(--color-matter-600)" opacity="0.85" />
+                    <text x="348" y="296" fill="var(--color-text-secondary)" fontSize="12">Mars</text>
+                </g>
+
+                <g>
+                    <line
+                        x1="636"
+                        y1="233"
+                        x2="696"
+                        y2="194"
+                        stroke="var(--color-text-secondary)"
+                        strokeWidth="1"
+                        strokeDasharray="3 6"
+                    />
+                    <circle cx="615" cy="245" r="29" fill="none" stroke="var(--color-text-primary)" strokeWidth="2" />
+                    <polygon
+                        points="615 222 635 232 641 252 625 269 604 267 589 251 593 231"
+                        fill="var(--color-matter-500)"
+                    />
+                    <polygon points="615 222 635 232 621 244 598 239" fill="var(--color-matter-300)" />
+                    <polygon points="621 244 641 252 625 269 610 254" fill="var(--color-matter-600)" />
+                    <text
+                        x="704"
+                        y="191"
+                        fill="var(--color-matter-300)"
+                        fontSize="14"
+                        fontWeight="600"
+                        letterSpacing="1"
+                    >CYDONIA
+                    </text>
+                    <text x="704" y="208" fill="var(--color-text-secondary)" fontSize="12">#01106</text>
+                </g>
+
+                <g>
+                    <polygon
+                        points="238 333 253 340 258 356 246 369 229 366 219 352 223 339"
+                        fill="var(--color-signal-400)"
+                    />
+                    <polygon points="238 333 253 340 242 350 223 339" fill="var(--color-signal-100)" opacity="0.7" />
+                    <text x="174" y="341" fill="var(--color-signal-100)" fontSize="14" fontWeight="500">ARCADIA</text>
+                    <text x="174" y="359" fill="var(--color-text-secondary)" fontSize="12">#01020</text>
+                </g>
+
+                <g>
+                    <polygon points="323 433 340 440 347 456 334 471 317 468 305 453 309 438" fill="#8f68a7" />
+                    <polygon points="323 433 340 440 329 451 309 438" fill="#b28ac4" opacity="0.78" />
+                    <text
+                        x="354"
+                        y="457"
+                        fill="var(--color-text-secondary)"
+                        fontSize="14"
+                        fontWeight="500"
+                    >DESDEMONA
+                    </text>
+                    <text x="354" y="475" fill="var(--color-text-secondary)" fontSize="12">#00666</text>
+                </g>
+
+                <g>
+                    <polygon
+                        points="623 419 641 428 646 445 633 459 615 455 604 440 608 425"
+                        fill="var(--color-info)"
+                        opacity="0.9"
+                    />
+                    <polygon points="623 419 641 428 628 438 608 425" fill="#a8d5ca" opacity="0.8" />
+                    <text
+                        x="654"
+                        y="447"
+                        fill="var(--color-text-secondary)"
+                        fontSize="14"
+                        fontWeight="500"
+                    >NORTIA
+                    </text>
+                    <text x="654" y="465" fill="var(--color-text-secondary)" fontSize="12">#04916</text>
+                </g>
+
+                <g>
+                    <polygon
+                        points="448 506 466 514 473 532 459 548 440 544 428 527 433 511"
+                        fill="var(--color-space-100)"
+                    />
+                    <polygon points="448 506 466 514 453 527 433 511" fill="var(--color-signal-50)" opacity="0.82" />
+                    <text
+                        x="486"
+                        y="541"
+                        fill="var(--color-text-secondary)"
+                        fontSize="14"
+                        fontWeight="500"
+                    >ORPHEUS
+                    </text>
+                    <text x="486" y="559" fill="var(--color-text-secondary)" fontSize="12">#03361</text>
+                </g>
+
+                <g>
+                    <polygon points="536 156 551 163 557 179 545 193 528 190 518 176 522 161" fill="#c7d7a7" />
+                    <polygon points="536 156 551 163 539 174 522 161" fill="#e4efd0" opacity="0.75" />
+                    <text
+                        x="568"
+                        y="174"
+                        fill="var(--color-text-secondary)"
+                        fontSize="14"
+                        fontWeight="500"
+                    >MORITAKUMI
+                    </text>
+                    <text x="568" y="192" fill="var(--color-text-secondary)" fontSize="12">#18492</text>
+                </g>
+
+                <g>
+                    <polygon points="702 338 720 346 727 362 714 378 696 375 684 359 689 343" fill="#7890b7" />
+                    <polygon points="702 338 720 346 707 357 689 343" fill="#a9bbdc" opacity="0.75" />
+                    <text
+                        x="738"
+                        y="366"
+                        fill="var(--color-text-secondary)"
+                        fontSize="14"
+                        fontWeight="500"
+                    >GANYMEDE
+                    </text>
+                    <text x="738" y="384" fill="var(--color-text-secondary)" fontSize="12">#01036</text>
+                </g>
+
+                <g opacity="0.75">
+                    <circle cx="321" cy="131" r="15" fill="#b39772" />
+                    <text x="336" y="122" fill="var(--color-text-secondary)" fontSize="12">Jupiter</text>
+
+                    <circle cx="117" cy="363" r="16" fill="#a98f61" />
+                    <ellipse
+                        cx="117"
+                        cy="363"
+                        rx="35"
+                        ry="8"
+                        fill="none"
+                        stroke="#a98f61"
+                        strokeWidth="3"
+                        opacity="0.45"
+                        transform="rotate(-9 117 363)"
+                    />
+                    <text x="136" y="356" fill="var(--color-text-secondary)" fontSize="12">Saturn</text>
+
+                    <circle cx="782" cy="429" r="15" fill="var(--color-info)" opacity="0.7" />
+                    <ellipse
+                        cx="782"
+                        cy="429"
+                        rx="27"
+                        ry="8"
+                        fill="none"
+                        stroke="var(--color-info)"
+                        strokeWidth="1.5"
+                        opacity="0.45"
+                        transform="rotate(-7 782 429)"
+                    />
+                    <text x="812" y="408" fill="var(--color-text-secondary)" fontSize="12">Uranus</text>
+
+                    <circle cx="452" cy="618" r="14" fill="#7890b7" opacity="0.75" />
+                    <text x="473" y="596" fill="var(--color-text-secondary)" fontSize="12">Neptune</text>
+                </g>
+            </svg>}
         </section>
 
         <aside className="panel col-start-3 row-span-2 row-start-1 flex min-h-0 flex-col p-5">
@@ -360,7 +590,15 @@ export const Desktop: StoryFn = function() {
             <p className="text-sm text-text-secondary">Anti-Matter Studios / Cydonia</p>
             <p className="justify-self-center text-sm text-text-secondary">7 tracked signals</p>
             <p className="justify-self-end text-sm text-text-secondary">live orbit track /
-                                                                        JD <span ref={julianDayRef} /></p>
+                                                                        JD <span ref={julianDayRef} />
+            </p>
         </footer>
     </main>;
 };
+
+Desktop.argTypes = {
+    useRealtimeView: {
+        control: "boolean",
+        name: "Use Realtime View?"
+    }
+}

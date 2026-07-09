@@ -1,0 +1,48 @@
+designation = "799"
+name = "Uranus"
+
+[mesh]
+geometry="sphere"
+segments=8
+radius=0.3
+
+material="gradient"
+from-colour=[0.64, 0.9, 0.92]
+to-colour=[0.2, 0.47, 0.55]
+
+[orbit]
+epoch = 2461228
+eccentricity = 4.73436323465579e-2
+meanAnomaly = 260.8523245230209
+semiMajorAxis = 19.2702661227874
+orbitalPeriod = 30897.29897856903
+
+[orbit.units]
+time = "julian-date-barycentric-dynamical-time-days"
+distance = "astronomical-units"
+angle = "degrees"
+
+[orbit.angles]
+inclination = 0.7718692761947127
+longitudeOfAscendingNode = 74.03102695170686
+argumentOfPerihelion = 92.07958610784841
+
+[source]
+time = "2026-07-06T16:03:26.547806537"
+name = "NASA/JPL Horizons APIv1.2"
+
+[source.data]
+dateJD = 2.461228e+6
+dateUTC = "A.D. 2026-Jul-06 12:00:00.0000 TDB"
+EC = 4.73436323465579e-2
+QR = 1.835794172824982e+1
+IN = 7.718692761947127e-1
+OM = 7.403102695170686e+1
+W = 9.207958610784841e+1
+Tp = 2.469737431589562e+6
+N = 1.16515039146206e-2
+MA = 2.608523245230209e+2
+TA = 2.555536369572545e+2
+A = 1.92702661227874e+1
+AD = 2.018259051732497e+1
+PR = 3.089729897856903e+4

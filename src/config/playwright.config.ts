@@ -6,42 +6,40 @@
 import { devices, defineConfig } from "@playwright/test";
 
 
-const isCi = Boolean(process.env.CI);
-const e2eBaseUrl = "http://127.0.0.1:10101";
-
 export default defineConfig({
-    expect: {
-        timeout: 5_000
-    },
-    forbidOnly: isCi,
+    expect: { timeout: 5_000 },
+    forbidOnly: !process.env.CI,
     fullyParallel: true,
     outputDir: "test-results",
     projects: [
         {
-            name: "desktop-chromium",
-            use: { ...devices["Desktop Chrome"] }
+            name: "desktop",
+            use: { ...devices["Desktop Safari"] }
         },
         {
-            name: "mobile-chromium",
-            use: { ...devices["Pixel 7"] }
+            name: "iphone",
+            use: { ...devices["iPhone 17"] }
+        },
+        {
+            name: "iphone-max",
+            use: { ...devices["iPhone 17 Pro Max"] }
         }
     ],
     reporter: [
         ["list"],
         ["html", { open: "never", outputFolder: "playwright-report" }]
     ],
-    retries: isCi ? 2 : 0,
+    retries: 0,
     testDir: "./e2e",
     use: {
-        baseURL: e2eBaseUrl,
+        baseURL: "http://localhost:10101/",
         trace: "on-first-retry"
     },
     webServer: {
-        command: "bunx --bun vite --host 127.0.0.1 --port 10101 --strictPort",
+        command: "bun run dev",
         cwd: ".",
-        reuseExistingServer: !isCi,
+        reuseExistingServer: !process.env.CI,
         timeout: 120_000,
-        url: e2eBaseUrl
-    },
-    workers: isCi ? 1 : undefined
+        url: "http://localhost:10101/"
+    }
 });

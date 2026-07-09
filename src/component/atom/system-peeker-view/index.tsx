@@ -3,34 +3,65 @@
  * This product is released under the MIT licence.
  */
 
-import { type ComponentProps, useCallback, useRef } from "react";
+import { type ComponentProps, useCallback, useEffect, useRef } from "react";
 
-import { createSystemPeekerRenderer, type SystemPeekerRenderer } from "@/lib/renderer";
-import { useSystemPeekerTimeManager } from "./hooks";
+import { createSystemPeekerSimulator, type SystemPeekerSimulator } from "@/lib/renderer";
+import {
+    useSystemPeekerAnimation,
+    useSystemPeekerViewportResizeObserver
+} from "@/component/atom/system-peeker-view/hooks";
+import { brand } from "@/lib/utils";
+import { Cydonia, Earth, Jupiter, Mars, Mercury, Neptune, Pluto, Saturn, Uranus, Venus } from "@/data";
+
 
 /** Canvas that renders the orbital System Peeker. */
 export default function SystemPeekerView(props: SystemPeekerViewProps) {
-    const renderer = useRef<SystemPeekerRenderer>(undefined);
+    const simulator = useRef<SystemPeekerSimulator>(undefined);
+    const resize = useSystemPeekerViewportResizeObserver(simulator);
+
     const initialiseRenderer = useCallback(function initialiseSystemPeekerView(canvas: HTMLCanvasElement | null) {
-        if (renderer.current) {
-            renderer.current[Symbol.dispose]();
-            delete renderer.current;
+        try {
+            if (simulator.current) {
+                simulator.current.dispose();
+                delete simulator.current;
+            }
+
+            if (!canvas) {
+                return;
+            }
+
+            simulator.current = createSystemPeekerSimulator(canvas);
+            simulator.current.resize(canvas.width, canvas.height);
+            simulator.current.addPlanet(Mercury);
+            simulator.current.addPlanet(Venus);
+            simulator.current.addPlanet(Earth);
+            simulator.current.addPlanet(Mars);
+            simulator.current.addPlanet(Jupiter);
+            simulator.current.addPlanet(Saturn);
+            simulator.current.addPlanet(Uranus);
+            simulator.current.addPlanet(Neptune);
+            simulator.current.addPlanet(Pluto);
+            simulator.current.addPlanet(Cydonia);
+            simulator.current.track(Cydonia.designation);
+            simulator.current.setSimulationTime(brand(0));
+        } finally {
+            resize(canvas);
         }
+    }, [resize]);
 
-        if (!canvas) {
-            return;
+    const wallClock = useRef<number>(Date.now());
+    useEffect(function(): VoidFunction {
+        const interval = window.setInterval(function() {
+            wallClock.current += 24 * 60 * 60 * 1000;
+            simulator.current?.setSimulationTime(brand(wallClock.current));
+        }, 1 / 30);
+
+        return function cleanup() {
+            clearInterval(interval);
         }
-
-        // TODO: Auto-resize the canvas.
-        canvas.width = canvas.clientWidth;
-        canvas.height = canvas.clientHeight;
-
-        renderer.current = createSystemPeekerRenderer(canvas);
-        renderer.current.resize(canvas.width, canvas.height);
-        renderer.current.start();
     }, []);
 
-    const _ = useSystemPeekerTimeManager(renderer);
+    useSystemPeekerAnimation(simulator);
 
     return <canvas ref={initialiseRenderer} {...props} />;
 }

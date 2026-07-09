@@ -3,22 +3,37 @@
  * This product is released under the MIT licence.
  */
 
+import { Scene as ThreeJsScene } from "three";
+import { ASTRONOMICAL_UNIT_SCALE } from "@/lib/renderer/config";
+import { type Camera, createCamera } from "../control/camera";
+import { type GameObject, wrapGameObject } from "./game-object";
+import { createSunGameObject } from "./sun";
 
-import { Object3D } from "three";
-import type { SystemPeekerObject } from "./object";
+/** Game object used as the root of the renderer. */
+export interface Scene extends GameObject<ThreeJsScene> {
+    /** The main camera used to render the scene. */
+    get camera(): Camera;
+}
 
+/**
+ * Initialises the main scene of the renderer.
+ *
+ * Creates the {@link Sun}, all the major {@link Planet} objects, and the {@link Camera}.
+ * Minor planets are to be added later, via the {@link SystemPeekerSimulator} object.
+ */
+export function createScene(): GameObject<Scene> {
+    const scene = new ThreeJsScene();
+    const sun = createSunGameObject();
+    const camera = createCamera();
 
-/** Scale applied to the root scene. Used to represent that 1 AU is N three.js world units. */
-export const AU_UNIT_SCALE = 300;
+    scene.add(sun);
+    scene.add(camera);
 
-/** Return type of the {@link createSystemPeekerScene} function. */
-export type SystemPeekerScene = SystemPeekerObject<Object3D>;
+    scene.scale.setScalar(1 / ASTRONOMICAL_UNIT_SCALE);
 
-/** Creates the object that will serve as the root of the scene. */
-export function createSystemPeekerScene(): SystemPeekerScene {
-    const scene = new Object3D();
-    scene.position.set(0, 0, 0);
-    scene.scale.set(1 / AU_UNIT_SCALE, 1 / AU_UNIT_SCALE, 1 / AU_UNIT_SCALE);
-
-    return { object: scene };
+    return wrapGameObject(scene, {
+        get camera() {
+            return camera;
+        }
+    });
 }

@@ -1,0 +1,49 @@
+designation = "499"
+name = "Mars"
+
+[mesh]
+geometry="sphere"
+segments=8
+radius=0.09
+
+material="gradient"
+from-colour=[0.87, 0.44, 0.26]
+to-colour=[0.38, 0.14, 0.1]
+
+
+[orbit]
+epoch = 2461228
+eccentricity = 9.342639747401188e-2
+meanAnomaly = 53.57327395405513
+semiMajorAxis = 1.523593874353394
+orbitalPeriod = 686.9137086854329
+
+[orbit.units]
+time = "julian-date-barycentric-dynamical-time-days"
+distance = "astronomical-units"
+angle = "degrees"
+
+[orbit.angles]
+inclination = 1.847485367716051
+longitudeOfAscendingNode = 49.48120003389302
+argumentOfPerihelion = 286.6080625231357
+
+[source]
+time = "2026-07-06T16:03:27.79180749"
+name = "NASA/JPL Horizons APIv1.2"
+
+[source.data]
+dateJD = 2.461228e+6
+dateUTC = "A.D. 2026-Jul-06 12:00:00.0000 TDB"
+EC = 9.342639747401188e-2
+QR = 1.381249987459084e+0
+IN = 1.847485367716051e+0
+OM = 4.948120003389302e+1
+W = 2.866080625231357e+2
+Tp = 2.4611257771769497e+6
+N = 5.240832952496212e-1
+MA = 5.357327395405513e+1
+TA = 6.278697566585578e+1
+A = 1.523593874353394e+0
+AD = 1.665937761247704e+0
+PR = 6.869137086854329e+2

@@ -1,0 +1,48 @@
+designation = "899"
+name = "Neptune"
+
+[mesh]
+geometry="sphere"
+segments=8
+radius=0.29
+
+material="gradient"
+from-colour=[0.31, 0.5, 0.95]
+to-colour=[0.08, 0.16, 0.45]
+
+[orbit]
+epoch = 2461228
+eccentricity = 1.014089545164462e-2
+meanAnomaly = 311.9849299755809
+semiMajorAxis = 30.08248145322228
+orbitalPeriod = 60263.96883423585
+
+[orbit.units]
+time = "julian-date-barycentric-dynamical-time-days"
+distance = "astronomical-units"
+angle = "degrees"
+
+[orbit.angles]
+inclination = 1.773999769564591
+longitudeOfAscendingNode = 131.93382473184
+argumentOfPerihelion = 279.0905049282919
+
+[source]
+time = "2026-07-06T16:03:27.178806547"
+name = "NASA/JPL Horizons APIv1.2"
+
+[source.data]
+dateJD = 2.461228e+6
+dateUTC = "A.D. 2026-Jul-06 12:00:00.0000 TDB"
+EC = 1.014089545164462e-2
+QR = 2.977741815387911e+1
+IN = 1.773999769564591e+0
+OM = 1.3193382473184e+2
+W = 2.790905049282919e+2
+Tp = 2.469265718565348e+6
+N = 5.9737187404671e-3
+MA = 3.119849299755809e+2
+TA = 3.111137949126154e+2
+A = 3.008248145322228e+1
+AD = 3.038754475256544e+1
+PR = 6.026396883423585e+4

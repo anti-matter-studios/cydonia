@@ -3,24 +3,29 @@
  * This product is released under the MIT licence.
  */
 
-import { WebGLRenderer } from "three";
-import { createSystemPeekerCamera, type SystemPeekerCamera } from "./control/camera";
-import { createSystemPeekerSystem, type SystemPeekerSystem } from "./object";
+import { type Camera, type Object3D, WebGLRenderer } from "three";
 
 
-/** List of resources used internally by the renderer. */
-export interface SystemPeekerRendererResources extends Disposable {
-    /** Target to render to. */
-    target: HTMLCanvasElement | OffscreenCanvas;
+/** Resources used by the renderer to draw the current scene. */
+export interface RendererResources {
+    /**
+     * Renders the provided scene, with the given camera.
+     *
+     * @param root The root {@link Object3D} of the scene that should be rendered.
+     * @param camera The camera to render the scene with.
+     */
+    render(root: Object3D, camera: Camera): void;
 
-    /** Three.js renderer object. */
-    renderer: WebGLRenderer;
+    /**
+     * Resizes the render's draw target.
+     *
+     * @param width The new width of the rendering area.
+     * @param height The new height of the rendering area.
+     */
+    resize(width: number, height: number): void;
 
-    /** Camera that should be used in the scene. */
-    camera: SystemPeekerCamera;
-
-    /** The scene created for the system peeker. */
-    system: SystemPeekerSystem;
+    /** Disposes of the underlying renderer. */
+    dispose(): void;
 }
 
 /**
@@ -29,33 +34,23 @@ export interface SystemPeekerRendererResources extends Disposable {
  * @param target The target to render to.
  * @returns The resources required by the renderer.
  */
-export function createSystemPeekerRendererResources(target: HTMLCanvasElement | OffscreenCanvas): SystemPeekerRendererResources {
-    const camera = createSystemPeekerCamera();
+export function createRendererResources(target: HTMLCanvasElement | OffscreenCanvas): RendererResources {
     const renderer = new WebGLRenderer({
         canvas: target,
         alpha: true,
         antialias: true,
         powerPreference: "low-power"
-    })
-
-    let resizeObserver: ResizeObserver | undefined;
-    if (target instanceof HTMLCanvasElement) {
-        const canvas = target;
-        resizeObserver = new ResizeObserver(function onResized() {
-            camera.resize(canvas.width, canvas.height);
-            renderer.setSize(canvas.width, canvas.height);
-        });
-        resizeObserver.observe(target);
-    }
+    });
 
     return {
-        target,
-        renderer,
-        camera,
-        system: createSystemPeekerSystem(),
-        [Symbol.dispose](): void {
-            resizeObserver?.disconnect();
-            this.renderer.dispose();
+        render(root: Object3D, camera: Camera): void {
+            renderer.render(root, camera);
+        },
+        resize(width: number, height: number): void {
+            renderer.setSize(width, height, false);
+        },
+        dispose(): void {
+            renderer.dispose();
         }
     };
 }

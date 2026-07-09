@@ -1,0 +1,56 @@
+designation = "1106"
+name = "Cydonia"
+
+[mesh]
+geometry="minor-planet"
+radius=0.2
+details=5
+height-scale=0.4
+noise-scale=0
+noise-octaves=4
+seed=1106
+
+material="gradient"
+from-colour=[0.8, 0.2, 0.3]
+to-colour=[0.05, 0.01, 0.02]
+
+[rotation]
+tilt=15
+rate=2
+
+[orbit]
+epoch = 2461228
+eccentricity = 1.240443478695231e-1
+meanAnomaly = 63.1233152455868
+semiMajorAxis = 2.59796209876775
+orbitalPeriod = 1529.493526766819
+
+[orbit.units]
+time = "julian-date-barycentric-dynamical-time-days"
+distance = "astronomical-units"
+angle = "degrees"
+
+[orbit.angles]
+inclination = 13.04695520518346
+longitudeOfAscendingNode = 327.9991971677421
+argumentOfPerihelion = 231.6372070055021
+
+[source]
+time = "2026-07-06T16:03:28.084807791"
+name = "NASA/JPL Horizons APIv1.2"
+
+[source.data]
+dateJD = 2.461228e+6
+dateUTC = "A.D. 2026-Jul-06 12:00:00.0000 TDB"
+EC = 1.240443478695231e-1
+QR = 2.275699584436367e+0
+IN = 1.304695520518346e+1
+OM = 3.279991971677421e+2
+W = 2.316372070055021e+2
+Tp = 2.4609598147165105e+6
+N = 2.353720324406998e-1
+MA = 6.31233152455868e+1
+TA = 7.662777460825387e+1
+A = 2.59796209876775e+0
+AD = 2.920224613099134e+0
+PR = 1.529493526766819e+3

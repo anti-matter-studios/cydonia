@@ -1,27 +1,38 @@
 {
+    "compileOnSave": false,
     "compilerOptions": {
-        "target": "ES2022",
-        "useDefineForClassFields": true,
-        "lib": ["DOM", "DOM.Iterable", "ES2022"],
-        "allowJs": false,
-        "skipLibCheck": true,
-        "esModuleInterop": true,
         "allowSyntheticDefaultImports": true,
-        "strict": true,
-        "forceConsistentCasingInFileNames": true,
-        "module": "ESNext",
-        "moduleResolution": "Bundler",
-        "resolveJsonModule": true,
-        "isolatedModules": true,
-        "noEmit": true,
-        "types": ["react", "react-dom", "bun", "node"],
+        "composite": true,
+        "declaration": true,
+        "declarationMap": true,
+        "emitDeclarationOnly": true,
+        "emitDecoratorMetadata": true,
+        "esModuleInterop": true,
+        "experimentalDecorators": true,
+        "importHelpers": true,
         "jsx": "react-jsx",
+        "lib": ["ESNext", "DOM"],
+        "module": "ESNext",
+        "moduleResolution": "bundler",
+        "noEmit": true,
         "paths": {
-            "@/*": ["./src/*"]
-        }
+            "@/*": [
+                "./src/*"
+            ]
+        },
+        "resolveJsonModule": true,
+        "skipDefaultLibCheck": true,
+        "skipLibCheck": true,
+        "sourceMap": true,
+        "strict": true,
+        "target": "ESNext",
+        "types": ["bun", "vite/client"]
     },
     "include": [
-        ".storybook/**/*.ts",
-        "src"
-    ]
+        ".storybook/**/*",
+        "src/**/*.ts",
+        "src/**/*.tsx",
+        "vite.config.ts"
+    ],
+    "exclude": ["node_modules", "tmp"]
 }

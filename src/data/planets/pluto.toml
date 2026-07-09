@@ -1,0 +1,48 @@
+designation = "999"
+name = "Pluto"
+
+[mesh]
+geometry="sphere"
+segments=8
+radius=0.1015
+
+material="gradient"
+from-colour=[0.75, 0.58, 0.47]
+to-colour=[0.34, 0.24, 0.2]
+
+[orbit]
+epoch = 2461228
+eccentricity = 2.511379539092997e-1
+meanAnomaly = 52.12256670869805
+semiMajorAxis = 39.73909575080887
+orbitalPeriod = 91500.90645875713
+
+[orbit.units]
+time = "julian-date-barycentric-dynamical-time-days"
+distance = "astronomical-units"
+angle = "degrees"
+
+[orbit.angles]
+inclination = 17.29703533996043
+longitudeOfAscendingNode = 110.4384967250511
+argumentOfPerihelion = 114.8457660289858
+
+[source]
+time = "2026-07-06T16:03:28.394808084"
+name = "NASA/JPL Horizons APIv1.2"
+
+[source.data]
+dateJD = 2.461228e+6
+dateUTC = "A.D. 2026-Jul-06 12:00:00.0000 TDB"
+EC = 2.511379539092997e-1
+QR = 2.975910055374499e+1
+IN = 1.729703533996043e+1
+OM = 1.104384967250511e+2
+W = 1.148457660289858e+2
+Tp = 2.447980049719992e+6
+N = 3.934387252898587e-3
+MA = 5.212256670869805e+1
+TA = 7.913771522124082e+1
+A = 3.973909575080887e+1
+AD = 4.971909094787276e+1
+PR = 9.150090645875713e+4

@@ -7,6 +7,16 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 
 import Cydonia from "@/component/organism/cydonia";
+import { initialiseI18n } from "@/lib/i18n";
 
-createRoot(document.getElementById("root") as HTMLElement)
+
+await initialiseI18n();
+
+const rootElement = document.getElementById("root");
+
+if (!rootElement) {
+    throw new Error("Could not find the application root element.");
+}
+
+createRoot(rootElement)
     .render(<StrictMode><Cydonia /></StrictMode>);

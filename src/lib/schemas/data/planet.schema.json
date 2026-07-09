@@ -1,0 +1,61 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://anti-matter.studio/schemas/data/planet.schema.json",
+    "description": "Schema used to validate planet data extracted from the JPL SSD database.",
+    "type": "object",
+    "properties": {
+        "designation": {
+            "type": "string",
+            "description": "The official designation of the planet."
+        },
+        "name": {
+            "type": "string",
+            "description": "The name of the planet."
+        },
+        "orbit": {
+            "$ref": "./orbital-parameters.schema.json"
+        },
+        "mesh": {
+            "$ref": "./mesh.schema.json"
+        },
+        "rotation": {
+            "type": "object",
+            "description": "The rotation applied to the planet, if any.",
+            "properties": {
+                "tilt": {
+                    "type": "number",
+                    "description": "The tilt of the planet around the Y axis, in degrees.",
+                    "minimum": 0,
+                    "maximum": 360
+                },
+                "rate": {
+                    "type": "number",
+                    "description": "The rate of rotation of the planet, in degrees per day.",
+                    "minimum": 0
+                }
+            },
+            "additionalProperties": false,
+            "required": ["tilt", "rate"]
+        },
+        "source": {
+            "type": "object",
+            "description": "The source of the planet orbit data.",
+            "properties": {
+                "time": {
+                    "type": "string",
+                    "description": "The time at which the data was retrieved."
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name of the source."
+                },
+                "data": {
+                    "type": "object",
+                    "description": "The data retrieved from the source."
+                }
+            }
+        }
+    },
+    "additionalProperties": false,
+    "required": ["designation", "name", "orbit", "mesh", "source"]
+}
