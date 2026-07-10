@@ -20,10 +20,10 @@ const HORIZONS_API_URL = new URL("https://ssd.jpl.nasa.gov/api/horizons.api");
 export async function fetchHorizonsAPIOrbitalParameters(designation: string) {
     const now = Temporal.Now.plainDateTimeISO("UTC");
     const today = Temporal.PlainDate.from(now);
-    const tomorrow = today.add({ days: 1 });
 
     const url = new URL(HORIZONS_API_URL);
     url.searchParams.set("format", "text");
+    url.searchParams.set("csv_format", "yes");
     url.searchParams.set("command", designation);
     url.searchParams.set("obj_data", "no");
     url.searchParams.set("make_ephem", "yes");
@@ -31,7 +31,7 @@ export async function fetchHorizonsAPIOrbitalParameters(designation: string) {
     url.searchParams.set("center", "10");
     url.searchParams.set("step_size", "1day");
     url.searchParams.set("start_time", `'${today.toString()} 12:00'`);
-    url.searchParams.set("stop_time", `'${tomorrow.toString()} 12:00'`);
+    url.searchParams.set("stop_time", `'${today.toString()} 13:00'`);
     url.searchParams.set("out_units", `AU-D`);
 
     const response = await fetch(url);
@@ -59,24 +59,6 @@ export async function fetchHorizonsAPIOrbitalParameters(designation: string) {
     return { source, parameters: ephemerisToOrbitalParameters(ephemeris) };
 }
 
-/** Data that was extracted from a single ephemeris element. */
-interface Ephemeris {
-    dateJD: number;
-    dateUTC: string;
-    EC: number;
-    QR: number;
-    IN: number;
-    OM: number;
-    W: number;
-    Tp: number;
-    N: number;
-    MA: number;
-    TA: number;
-    A: number;
-    AD: number;
-    PR: number;
-}
-
 /**
  * Parses the entire ephemeris text returned by the Horizons API.
  *
@@ -85,50 +67,39 @@ interface Ephemeris {
  * @param text The text to parse.
  * @returns The parsed parameters.
  */
-function parseHorizonEphemeris(text: string): Ephemeris {
+function parseHorizonEphemeris(text: string) {
     const soeIndex = text.indexOf("$$SOE");
     const eoeIndex = text.indexOf("$$EOE");
     if (soeIndex === -1 || eoeIndex === -1) {
         throw new Error("Failed to find $$SOE and $$EOE markers in the ephemeris text.");
     }
-    const lines = text.slice(soeIndex + "$$SOE".length + 1, eoeIndex).split("\n");
 
-    // Get the date from the text.
-    const dateEndIndex = lines[0].indexOf("=");
-    const dateJD = parseFloat(lines[0].slice(0, dateEndIndex));
-    const dateUTC = lines[0].slice(dateEndIndex + 1).trim();
+    // Parse the data as comma-separated.
+    const [JD, UTC, EC, QR, IN, OM, W, Tp, N, MA, TA, A, AD, PR] = text.slice(soeIndex + 6, eoeIndex).split(",");
 
     // Parse the rest of the data.
-    const data: Ephemeris = {
-        dateJD,
-        dateUTC,
-        EC: 0,
-        QR: 0,
-        IN: 0,
-        OM: 0,
-        W: 0,
-        Tp: 0,
-        N: 0,
-        MA: 0,
-        TA: 0,
-        A: 0,
-        AD: 0,
-        PR: 0
+    return {
+        JD: parseFloat(JD.trim()),
+        UTC,
+        EC: parseFloat(EC.trim()),
+        QR: parseFloat(QR.trim()),
+        IN: parseFloat(IN.trim()),
+        OM: parseFloat(OM.trim()),
+        W: parseFloat(W.trim()),
+        Tp: parseFloat(Tp.trim()),
+        N: parseFloat(N.trim()),
+        MA: parseFloat(MA.trim()),
+        TA: parseFloat(TA.trim()),
+        A: parseFloat(A.trim()),
+        AD: parseFloat(AD.trim()),
+        PR: parseFloat(PR.trim())
     };
-    for (const line of lines.slice(1, 5)) {
-        for (let column = 0; column < 3; column++) {
-            const [key, value] = line.slice(column * 26, (column + 1) * 26).split("=");
-            data[key.trim() as keyof Omit<Ephemeris, "dateJD" | "dateUTC">] = parseFloat(value.trim());
-        }
-    }
-
-    return data;
 }
 
 /** Converts the given ephemeris to {@link OrbitalParameters}. */
-function ephemerisToOrbitalParameters(ephemeris: Ephemeris): OrbitalParameters {
+function ephemerisToOrbitalParameters(ephemeris: ReturnType<typeof parseHorizonEphemeris>): OrbitalParameters {
     return {
-        epoch: brand(ephemeris.dateJD),
+        epoch: brand(ephemeris.JD),
         eccentricity: ephemeris.EC,
         angles: {
             inclination: brand(ephemeris.IN),

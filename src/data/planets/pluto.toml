@@ -2,20 +2,26 @@ designation = "999"
 name = "Pluto"
 
 [mesh]
-geometry="sphere"
-segments=8
 radius=0.1015
+subdivisions=3
+seed=999
+shade-steps=5
+gradient-light="bf9478"
+gradient-dark="573d33"
 
-material="gradient"
-from-colour=[0.75, 0.58, 0.47]
-to-colour=[0.34, 0.24, 0.2]
+[mesh.height]
+initialAmplitude=0
+scale=1
+octaves=1
+persistence=0.5
+lacunarity=2
 
 [orbit]
-epoch = 2461228
-eccentricity = 2.511379539092997e-1
-meanAnomaly = 52.12256670869805
-semiMajorAxis = 39.73909575080887
-orbitalPeriod = 91500.90645875713
+epoch = 2461232
+eccentricity = 2.448115661472565e-1
+meanAnomaly = 54.77323100451795
+semiMajorAxis = 39.18440645414666
+orbitalPeriod = 89591.81491947138
 
 [orbit.units]
 time = "julian-date-barycentric-dynamical-time-days"
@@ -23,26 +29,26 @@ distance = "astronomical-units"
 angle = "degrees"
 
 [orbit.angles]
-inclination = 17.29703533996043
-longitudeOfAscendingNode = 110.4384967250511
-argumentOfPerihelion = 114.8457660289858
+inclination = 16.95059929886564
+longitudeOfAscendingNode = 110.1420643922016
+argumentOfPerihelion = 112.7619495281259
 
 [source]
-time = "2026-07-06T16:03:28.394808084"
+time = "2026-07-10T08:32:21.438341112"
 name = "NASA/JPL Horizons APIv1.2"
 
 [source.data]
-dateJD = 2.461228e+6
-dateUTC = "A.D. 2026-Jul-06 12:00:00.0000 TDB"
-EC = 2.511379539092997e-1
-QR = 2.975910055374499e+1
-IN = 1.729703533996043e+1
-OM = 1.104384967250511e+2
-W = 1.148457660289858e+2
-Tp = 2.447980049719992e+6
-N = 3.934387252898587e-3
-MA = 5.212256670869805e+1
-TA = 7.913771522124082e+1
-A = 3.973909575080887e+1
-AD = 4.971909094787276e+1
-PR = 9.150090645875713e+4
+JD = 2.461232e+6
+UTC = " A.D. 2026-Jul-10 12:00:00.0000"
+EC = 2.448115661472565e-1
+QR = 2.959161054155635e+1
+IN = 1.695059929886564e+1
+OM = 1.101420643922016e+2
+W = 1.127619495281259e+2
+Tp = 2.44760079673695e+6
+N = 4.018224213044261e-3
+MA = 5.477323100451795e+1
+TA = 8.15237460041237e+1
+A = 3.918440645414666e+1
+AD = 4.877720236673697e+1
+PR = 8.959181491947138e+4

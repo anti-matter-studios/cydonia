@@ -1,0 +1,58 @@
+designation = "39314"
+name = "Moritakumi"
+
+[mesh]
+radius=0.104
+subdivisions=4
+seed=39314
+shade-steps=5
+gradient-light="d8f4e8"
+gradient-dark="7fb69b"
+
+[mesh.height]
+initialAmplitude=0.18
+scale=0.4
+octaves=11
+persistence=0.54
+lacunarity=2
+
+[rotation]
+tilt=12
+rate=2.1
+
+[orbit]
+epoch = 2461232
+eccentricity = 3.0225001173281e-1
+meanAnomaly = 275.6095157853263
+semiMajorAxis = 2.647864525917417
+orbitalPeriod = 1573.772922579401
+
+[orbit.units]
+time = "julian-date-barycentric-dynamical-time-days"
+distance = "astronomical-units"
+angle = "degrees"
+
+[orbit.angles]
+inclination = 14.28408744195233
+longitudeOfAscendingNode = 157.0079512877871
+argumentOfPerihelion = 239.6029484800341
+
+[source]
+time = "2026-07-10T08:32:24.407344084"
+name = "NASA/JPL Horizons APIv1.2"
+
+[source.data]
+JD = 2.461232e+6
+UTC = " A.D. 2026-Jul-10 12:00:00.0000"
+EC = 3.0225001173281e-1
+QR = 1.847547441891986e+0
+IN = 1.428408744195233e+1
+OM = 1.570079512877871e+2
+W = 2.396029484800341e+2
+Tp = 2.46160092071939e+6
+N = 2.287496466834382e-1
+MA = 2.756095157853263e+2
+TA = 2.41882093375366e+2
+A = 2.647864525917417e+0
+AD = 3.448181609942847e+0
+PR = 1.573772922579401e+3

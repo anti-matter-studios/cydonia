@@ -2,20 +2,26 @@ designation = "199"
 name = "Mercury"
 
 [mesh]
-geometry="sphere"
-segments=8
 radius=0.04
+subdivisions=3
+seed=199
+shade-steps=5
+gradient-light="b8b09e"
+gradient-dark="57524d"
 
-material="gradient"
-from-colour=[0.72, 0.69, 0.62]
-to-colour=[0.34, 0.32, 0.3]
+[mesh.height]
+initialAmplitude=0
+scale=1
+octaves=1
+persistence=0.5
+lacunarity=2
 
 [orbit]
-epoch = 2461228
-eccentricity = 2.056374738790735e-1
-meanAnomaly = 200.8693558488874
-semiMajorAxis = 0.3870981089216968
-orbitalPeriod = 87.96906284205849
+epoch = 2461232
+eccentricity = 2.056371774294365e-1
+meanAnomaly = 217.2386586146031
+semiMajorAxis = 0.387098164408357
+orbitalPeriod = 87.96908175629328
 
 [orbit.units]
 time = "julian-date-barycentric-dynamical-time-days"
@@ -23,26 +29,26 @@ distance = "astronomical-units"
 angle = "degrees"
 
 [orbit.angles]
-inclination = 7.003380890556769
-longitudeOfAscendingNode = 48.29765466095551
-argumentOfPerihelion = 29.20131427004759
+inclination = 7.003376597981388
+longitudeOfAscendingNode = 48.29761410521125
+argumentOfPerihelion = 29.20140382391587
 
 [source]
-time = "2026-07-06T16:03:29.316809005"
+time = "2026-07-10T08:32:23.792343484"
 name = "NASA/JPL Horizons APIv1.2"
 
 [source.data]
-dateJD = 2.461228e+6
-dateUTC = "A.D. 2026-Jul-06 12:00:00.0000 TDB"
-EC = 2.056374738790735e-1
-QR = 3.074962316596727e-1
-IN = 7.003380890556769e+0
-OM = 4.829765466095551e+1
-W = 2.920131427004759e+1
-Tp = 2.461266884926765e+6
-N = 4.0923477910223e+0
-MA = 2.008693558488874e+2
-TA = 1.94123867254008e+2
-A = 3.870981089216968e-1
-AD = 4.666999861837209e-1
-PR = 8.796906284205849e+1
+JD = 2.461232e+6
+UTC = " A.D. 2026-Jul-10 12:00:00.0000"
+EC = 2.056371774294365e-1
+QR = 3.074963904913065e-1
+IN = 7.003376597981388e+0
+OM = 4.829761410521125e+1
+W = 2.920140382391587e+1
+Tp = 2.461266884955867e+6
+N = 4.092346911126485e+0
+MA = 2.172386586146031e+2
+TA = 2.054930195414291e+2
+A = 3.87098164408357e-1
+AD = 4.666999383254076e-1
+PR = 8.796908175629328e+1

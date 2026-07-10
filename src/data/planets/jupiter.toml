@@ -2,20 +2,26 @@ designation = "599"
 name = "Jupiter"
 
 [mesh]
-geometry="sphere"
-segments=8
 radius=0.2
+subdivisions=3
+seed=599
+shade-steps=5
+gradient-light="dbab7a"
+gradient-dark="734a33"
 
-material="gradient"
-from-colour=[0.86, 0.67, 0.48]
-to-colour=[0.45, 0.29, 0.2]
+[mesh.height]
+initialAmplitude=0
+scale=1
+octaves=1
+persistence=0.5
+lacunarity=2
 
 [orbit]
-epoch = 2461228
-eccentricity = 4.826640113624524e-2
-meanAnomaly = 105.1064745776478
-semiMajorAxis = 5.201569567260616
-orbitalPeriod = 4331.04658545331
+epoch = 2461232
+eccentricity = 4.842990717218832e-2
+meanAnomaly = 105.1659616367267
+semiMajorAxis = 5.202384467190713
+orbitalPeriod = 4332.064405481086
 
 [orbit.units]
 time = "julian-date-barycentric-dynamical-time-days"
@@ -23,26 +29,26 @@ distance = "astronomical-units"
 angle = "degrees"
 
 [orbit.angles]
-inclination = 1.303800763483511
-longitudeOfAscendingNode = 100.5220228390005
-argumentOfPerihelion = 273.3200135919225
+inclination = 1.303761434389124
+longitudeOfAscendingNode = 100.5212658617383
+argumentOfPerihelion = 273.568080147733
 
 [source]
-time = "2026-07-06T16:03:28.695808394"
+time = "2026-07-10T08:32:22.460342063"
 name = "NASA/JPL Horizons APIv1.2"
 
 [source.data]
-dateJD = 2.461228e+6
-dateUTC = "A.D. 2026-Jul-06 12:00:00.0000 TDB"
-EC = 4.826640113624524e-2
-QR = 4.95050852398913e+0
-IN = 1.303800763483511e+0
-OM = 1.005220228390005e+2
-W = 2.733200135919225e+2
-Tp = 2.459963497117143e+6
-N = 8.312078683455686e-2
-MA = 1.051064745776478e+2
-TA = 1.103562148331762e+2
-A = 5.201569567260616e+0
-AD = 5.452630610532103e+0
-PR = 4.33104658545331e+3
+JD = 2.461232e+6
+UTC = " A.D. 2026-Jul-10 12:00:00.0000"
+EC = 4.842990717218832e-2
+QR = 4.950433470370632e+0
+IN = 1.303761434389124e+0
+OM = 1.005212658617383e+2
+W = 2.73568080147733e+2
+Tp = 2.459966484113682e+6
+N = 8.310125757699142e-2
+MA = 1.051659616367267e+2
+TA = 1.104313713802927e+2
+A = 5.202384467190713e+0
+AD = 5.454335464010794e+0
+PR = 4.332064405481086e+3

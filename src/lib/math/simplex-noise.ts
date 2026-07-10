@@ -30,11 +30,14 @@ const GRADIENTS_3D: ReadonlyArray<readonly [number, number, number]> = [
     [0, -1, -1]
 ];
 
-/** Function that samples 3D Simplex noise at a given coordinate. */
-export type SimplexNoiseSampler = (x: number, y: number, z: number) => number;
-
 /** Options used when sampling multiple Simplex noise octaves. */
 export interface LayeredSimplexNoiseOptions {
+    /** Output amplitude after octave normalisation. */
+    readonly initialAmplitude?: number;
+
+    /** Domain offset applied after frequency scaling. */
+    readonly offset?: readonly [number, number, number];
+
     /** Frequency of the first octave. */
     readonly scale?: number;
 
@@ -48,6 +51,26 @@ export interface LayeredSimplexNoiseOptions {
     readonly lacunarity?: number;
 }
 
+/** Callable object that samples seeded 3D Simplex noise. */
+export interface SimplexNoiseSampler {
+    /** Samples 3D Simplex noise at a given coordinate. */
+    (x: number, y: number, z: number): number;
+
+    /** The noise algorithm used by this sampler. */
+    readonly algorithm: "simplex";
+
+    /** Seed used to initialise the gradient permutation. */
+    readonly seed: RandomGeneratorSeed;
+
+    /** Samples layered Simplex noise at a given coordinate. */
+    readonly layered: (
+        x: number,
+        y: number,
+        z: number,
+        options?: LayeredSimplexNoiseOptions
+    ) => number;
+}
+
 /**
  * Creates a deterministic 3D Simplex noise sampler.
  *
@@ -57,7 +80,7 @@ export interface LayeredSimplexNoiseOptions {
 export function createSimplexNoiseSampler(seed: RandomGeneratorSeed = DEFAULT_SEED): SimplexNoiseSampler {
     const permutation = createPermutation(seed);
 
-    return function sampleSimplexNoise(x: number, y: number, z: number): number {
+    function sampleSimplexNoise(x: number, y: number, z: number): number {
         const skew = (x + y + z) * F3;
         const i = Math.floor(x + skew);
         const j = Math.floor(y + skew);
@@ -90,7 +113,61 @@ export function createSimplexNoiseSampler(seed: RandomGeneratorSeed = DEFAULT_SE
             + sampleCorner(permutation, ii + i2, jj + j2, kk + k2, x2, y2, z2)
             + sampleCorner(permutation, ii + 1, jj + 1, kk + 1, x3, y3, z3)
         );
-    };
+    }
+
+    function sampleLayeredNoise(
+        x: number,
+        y: number,
+        z: number,
+        options?: LayeredSimplexNoiseOptions
+    ): number {
+        return sampleLayeredSimplexNoise(sampleSimplexNoise, x, y, z, options);
+    }
+
+    return Object.defineProperties(sampleSimplexNoise, {
+        algorithm: {
+            enumerable: true,
+            value: "simplex"
+        },
+        layered: {
+            enumerable: true,
+            value: sampleLayeredNoise
+        },
+        seed: {
+            enumerable: true,
+            value: seed
+        }
+    }) as SimplexNoiseSampler;
+}
+
+type SimplexNoiseSampleFunction = (x: number, y: number, z: number) => number;
+
+function sampleLayeredNoise(
+    noise: SimplexNoiseSampleFunction,
+    x: number,
+    y: number,
+    z: number,
+    options: LayeredSimplexNoiseOptions = {}
+): number {
+    const initialAmplitude = options.initialAmplitude ?? 1;
+    const [offsetX, offsetY, offsetZ] = options.offset ?? [0, 0, 0];
+    let amplitude = 1;
+    let frequency = options.scale ?? 1;
+    let height = 0;
+    let amplitudeSum = 0;
+
+    for (let octave = 0; octave < (options.octaves ?? 1); octave++) {
+        height += amplitude * noise(
+            x * frequency + offsetX,
+            y * frequency + offsetY,
+            z * frequency + offsetZ
+        );
+        amplitudeSum += amplitude;
+        amplitude *= options.persistence ?? 0.5;
+        frequency *= options.lacunarity ?? 2;
+    }
+
+    return amplitudeSum === 0 ? 0 : (height / amplitudeSum) * initialAmplitude;
 }
 
 /**
@@ -104,28 +181,16 @@ export function createSimplexNoiseSampler(seed: RandomGeneratorSeed = DEFAULT_SE
  * @returns A normalised layered sample in roughly `[-1, 1]`.
  */
 export function sampleLayeredSimplexNoise(
-    noise: SimplexNoiseSampler,
+    noise: SimplexNoiseSampleFunction,
     x: number,
     y: number,
     z: number,
     options: LayeredSimplexNoiseOptions = {}
 ): number {
-    let amplitude = 1;
-    let frequency = options.scale ?? 1;
-    let height = 0;
-    let amplitudeSum = 0;
-
-    for (let octave = 0; octave < (options.octaves ?? 1); octave++) {
-        height += amplitude * noise(x * frequency, y * frequency, z * frequency);
-        amplitudeSum += amplitude;
-        amplitude *= options.persistence ?? 0.5;
-        frequency *= options.lacunarity ?? 2;
-    }
-
-    return amplitudeSum === 0 ? 0 : height / amplitudeSum;
+    return sampleLayeredNoise(noise, x, y, z, options);
 }
 
-function createPermutation(seed: RandomGeneratorSeed): Uint8Array {
+function createPermutation(seed: RandomGeneratorSeed): Uint8Array<ArrayBuffer> {
     const random = createRandomGenerator(seed);
     const source = new Uint8Array(PERMUTATION_SIZE);
 
@@ -178,7 +243,7 @@ function getSimplexCornerOffsets(
 }
 
 function sampleCorner(
-    permutation: Uint8Array,
+    permutation: Uint8Array<ArrayBuffer>,
     i: number,
     j: number,
     k: number,

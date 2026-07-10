@@ -50,6 +50,7 @@ export default tseslint.config(
         rules: {
             ...reactHooks.configs.recommended.rules,
             "@typescript-eslint/array-type": ["error", { default: "array-simple" }],
+            "@typescript-eslint/no-invalid-void-type": ["off"],
             "@typescript-eslint/consistent-type-definitions": ["error", "interface"],
             "@typescript-eslint/consistent-type-imports": [
                 "error",

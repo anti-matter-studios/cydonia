@@ -4,7 +4,7 @@
  */
 
 import type { Object3D } from "three";
-import type { SimulationState } from "../simulation/state";
+import type { SimulationState } from "../state";
 
 /** List of methods attached to a Three.JS object. */
 interface GameObjectMethods {
@@ -25,9 +25,9 @@ interface GameObjectMethods {
      * For a more consistent, render-time-based update, see {@link update}.
      *
      * @param state The state of the simulation at the current instant.
-     * @param deltaTime The time elapsed since the last simulation update, in seconds.
+     * @param deltaTimeSeconds The time elapsed since the last simulation update, in seconds.
      */
-    simulationUpdate?(state: SimulationState, deltaTime: number): void;
+    simulationUpdate?(state: SimulationState, deltaTimeSeconds: number): void;
 }
 
 /** System peeker "game" object that can interact with the world. */

@@ -3,17 +3,17 @@
  * This product is released under the MIT licence.
  */
 
+import { BufferGeometry, LineBasicMaterial, LineLoop, type Material, type Vector3 } from "three";
+import { asRadiansWrapped } from "@/lib/math";
+import { convertDegreesOrbitalParameterAnglesToRadians, type OrbitalParameters } from "@/lib/schemas";
+import { getBodyPerifocalCoordinatesFromEccentricAnomaly, getOrbitPerifocalToWorldQuaternion } from "@/lib/orbit";
 
 import { type GameObject, wrapGameObject } from "@/lib/renderer/object";
-import { BufferGeometry, LineBasicMaterial, LineLoop, type Material, type Quaternion, type Vector3 } from "three";
-import { type OrbitalParameters } from "@/lib/schemas";
 import { ORBIT_BASE_COLOUR, ORBIT_LINE_SEGMENTS } from "@/lib/renderer/config";
-import { getBodyPerifocalCoordinatesFromEccentricAnomaly } from "@/lib/orbit";
-import { asRadiansWrapped } from "@/lib/math";
 
 
 /** Game object used to represent a planet orbit. */
-export interface PlanetOrbit extends GameObject<LineLoop<BufferGeometry, Material>> {
+export interface OrbitLine extends GameObject<LineLoop<BufferGeometry, Material>> {
     /** Reference to the orbital parameters of this planet orbit object. */
     readonly parameters: OrbitalParameters;
 
@@ -30,7 +30,7 @@ export interface PlanetOrbit extends GameObject<LineLoop<BufferGeometry, Materia
  * @param parameters The orbital parameters being represented.
  * @returns The newly created planet orbit game object.
  */
-export function createPlanetOrbit(parameters: OrbitalParameters): PlanetOrbit {
+export function createOrbitLine(parameters: OrbitalParameters): OrbitLine {
     const points = deriveOrbitVertices(parameters);
     const geometry = new BufferGeometry().setFromPoints(points);
     const material = new LineBasicMaterial({
@@ -39,6 +39,12 @@ export function createPlanetOrbit(parameters: OrbitalParameters): PlanetOrbit {
         transparent: true
     });
     const loop = new LineLoop<BufferGeometry, Material>(geometry, material);
+
+    geometry.applyQuaternion(
+        getOrbitPerifocalToWorldQuaternion(
+            convertDegreesOrbitalParameterAnglesToRadians(parameters.angles)
+        )
+    );
 
     return wrapGameObject(loop, {
         get parameters() {

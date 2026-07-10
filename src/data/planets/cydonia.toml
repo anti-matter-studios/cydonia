@@ -2,28 +2,32 @@ designation = "1106"
 name = "Cydonia"
 
 [mesh]
-geometry="minor-planet"
-radius=0.2
-details=5
-height-scale=0.4
-noise-scale=0
-noise-octaves=4
+radius=0.1
+subdivisions=4
 seed=1106
+specular-light="ffddee"
+specular-threshold=0.9
+shade-steps=5
+gradient-light="cc3344"
+gradient-dark="0d0305"
 
-material="gradient"
-from-colour=[0.8, 0.2, 0.3]
-to-colour=[0.05, 0.01, 0.02]
+[mesh.height]
+initialAmplitude=0.3
+scale=0.5
+octaves=16
+persistence=0.5
+lacunarity=2
 
 [rotation]
 tilt=15
 rate=2
 
 [orbit]
-epoch = 2461228
-eccentricity = 1.240443478695231e-1
-meanAnomaly = 63.1233152455868
-semiMajorAxis = 2.59796209876775
-orbitalPeriod = 1529.493526766819
+epoch = 2461232
+eccentricity = 1.240458050565186e-1
+meanAnomaly = 64.06348537489559
+semiMajorAxis = 2.597970566805515
+orbitalPeriod = 1529.501004831744
 
 [orbit.units]
 time = "julian-date-barycentric-dynamical-time-days"
@@ -31,26 +35,26 @@ distance = "astronomical-units"
 angle = "degrees"
 
 [orbit.angles]
-inclination = 13.04695520518346
-longitudeOfAscendingNode = 327.9991971677421
-argumentOfPerihelion = 231.6372070055021
+inclination = 13.04695689361536
+longitudeOfAscendingNode = 327.9991878577039
+argumentOfPerihelion = 231.6384705297795
 
 [source]
-time = "2026-07-06T16:03:28.084807791"
+time = "2026-07-10T08:32:21.112340836"
 name = "NASA/JPL Horizons APIv1.2"
 
 [source.data]
-dateJD = 2.461228e+6
-dateUTC = "A.D. 2026-Jul-06 12:00:00.0000 TDB"
-EC = 1.240443478695231e-1
-QR = 2.275699584436367e+0
-IN = 1.304695520518346e+1
-OM = 3.279991971677421e+2
-W = 2.316372070055021e+2
-Tp = 2.4609598147165105e+6
-N = 2.353720324406998e-1
-MA = 6.31233152455868e+1
-TA = 7.662777460825387e+1
-A = 2.59796209876775e+0
-AD = 2.920224613099134e+0
-PR = 1.529493526766819e+3
+JD = 2.461232e+6
+UTC = " A.D. 2026-Jul-10 12:00:00.0000"
+EC = 1.240458050565186e-1
+QR = 2.275703216332985e+0
+IN = 1.304695689361536e+1
+OM = 3.279991878577039e+2
+W = 2.316384705297795e+2
+Tp = 2.460959818985406e+6
+N = 2.353708816553556e-1
+MA = 6.406348537489559e+1
+TA = 7.764412113342598e+1
+A = 2.597970566805515e+0
+AD = 2.920237917278045e+0
+PR = 1.529501004831744e+3

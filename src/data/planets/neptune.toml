@@ -2,20 +2,26 @@ designation = "899"
 name = "Neptune"
 
 [mesh]
-geometry="sphere"
-segments=8
 radius=0.29
+subdivisions=3
+seed=899
+shade-steps=5
+gradient-light="4f80f2"
+gradient-dark="142973"
 
-material="gradient"
-from-colour=[0.31, 0.5, 0.95]
-to-colour=[0.08, 0.16, 0.45]
+[mesh.height]
+initialAmplitude=0
+scale=1
+octaves=1
+persistence=0.5
+lacunarity=2
 
 [orbit]
-epoch = 2461228
-eccentricity = 1.014089545164462e-2
-meanAnomaly = 311.9849299755809
-semiMajorAxis = 30.08248145322228
-orbitalPeriod = 60263.96883423585
+epoch = 2461232
+eccentricity = 1.03641311970156e-2
+meanAnomaly = 312.0738027614337
+semiMajorAxis = 30.08719691929567
+orbitalPeriod = 60278.13906739354
 
 [orbit.units]
 time = "julian-date-barycentric-dynamical-time-days"
@@ -23,26 +29,26 @@ distance = "astronomical-units"
 angle = "degrees"
 
 [orbit.angles]
-inclination = 1.773999769564591
-longitudeOfAscendingNode = 131.93382473184
-argumentOfPerihelion = 279.0905049282919
+inclination = 1.766294030507155
+longitudeOfAscendingNode = 131.6325972055978
+argumentOfPerihelion = 279.3450420857305
 
 [source]
-time = "2026-07-06T16:03:27.178806547"
+time = "2026-07-10T08:32:19.908339151"
 name = "NASA/JPL Horizons APIv1.2"
 
 [source.data]
-dateJD = 2.461228e+6
-dateUTC = "A.D. 2026-Jul-06 12:00:00.0000 TDB"
-EC = 1.014089545164462e-2
-QR = 2.977741815387911e+1
-IN = 1.773999769564591e+0
-OM = 1.3193382473184e+2
-W = 2.790905049282919e+2
-Tp = 2.469265718565348e+6
-N = 5.9737187404671e-3
-MA = 3.119849299755809e+2
-TA = 3.111137949126154e+2
-A = 3.008248145322228e+1
-AD = 3.038754475256544e+1
-PR = 6.026396883423585e+4
+JD = 2.461232e+6
+UTC = " A.D. 2026-Jul-10 12:00:00.0000"
+EC = 1.03641311970156e-2
+QR = 2.977536926307365e+1
+IN = 1.766294030507155e+0
+OM = 1.316325972055978e+2
+W = 2.793450420857305e+2
+Tp = 2.469256727728105e+6
+N = 5.972314433886298e-3
+MA = 3.120738027614337e+2
+TA = 3.111845556683884e+2
+A = 3.008719691929567e+1
+AD = 3.039902457551769e+1
+PR = 6.027813906739354e+4

@@ -14,7 +14,7 @@ import fragmentShader from "./sun-shader.frag";
 export type Sun = GameObject<Mesh<SphereGeometry, Material>>;
 
 /** Creates the {@link Sun} object. */
-export function createSunGameObject(): Sun {
+export function createSun(): Sun {
     const geometry = new SphereGeometry(.1, 32, 32);
     const material = new ShaderMaterial({
         name: "Sun Material",

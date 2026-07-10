@@ -2,20 +2,26 @@ designation = "699"
 name = "Saturn"
 
 [mesh]
-geometry="sphere"
-segments=8
 radius=0.35
+subdivisions=3
+seed=699
+shade-steps=5
+gradient-light="e6c280"
+gradient-dark="7a5c33"
 
-material="gradient"
-from-colour=[0.9, 0.76, 0.5]
-to-colour=[0.48, 0.36, 0.2]
+[mesh.height]
+initialAmplitude=0
+scale=1
+octaves=1
+persistence=0.5
+lacunarity=2
 
 [orbit]
-epoch = 2461228
-eccentricity = 5.534078881964554e-2
-meanAnomaly = 281.9474043151601
-semiMajorAxis = 9.542008761368852
-orbitalPeriod = 10764.5551788061
+epoch = 2461232
+eccentricity = 5.530505229164928e-2
+meanAnomaly = 281.7150035930765
+semiMajorAxis = 9.538583799740248
+orbitalPeriod = 10758.76003427643
 
 [orbit.units]
 time = "julian-date-barycentric-dynamical-time-days"
@@ -23,26 +29,26 @@ distance = "astronomical-units"
 angle = "degrees"
 
 [orbit.angles]
-inclination = 2.488426736741216
-longitudeOfAscendingNode = 113.6740301908658
-argumentOfPerihelion = 338.5286749687725
+inclination = 2.487122968783624
+longitudeOfAscendingNode = 113.5670586062219
+argumentOfPerihelion = 339.0032913493263
 
 [source]
-time = "2026-07-06T16:03:27.490807178"
+time = "2026-07-10T08:32:20.193339908"
 name = "NASA/JPL Horizons APIv1.2"
 
 [source.data]
-dateJD = 2.461228e+6
-dateUTC = "A.D. 2026-Jul-06 12:00:00.0000 TDB"
-EC = 5.534078881964554e-2
-QR = 9.01394646959073e+0
-IN = 2.488426736741216e+0
-OM = 1.136740301908658e+2
-W = 3.385286749687725e+2
-Tp = 2.4635618929808293e+6
-N = 3.344309114683992e-2
-MA = 2.819474043151601e+2
-TA = 2.756657335131681e+2
-A = 9.542008761368852e+0
-AD = 1.007007105314698e+1
-PR = 1.07645551788061e+4
+JD = 2.461232e+6
+UTC = " A.D. 2026-Jul-10 12:00:00.0000"
+EC = 5.530505229164928e-2
+QR = 9.011051923907335e+0
+IN = 2.487122968783624e+0
+OM = 1.135670586062219e+2
+W = 3.390032913493263e+2
+Tp = 2.463571581918406e+6
+N = 3.346110507652114e-2
+MA = 2.817150035930765e+2
+TA = 2.754338561302646e+2
+A = 9.538583799740248e+0
+AD = 1.006611567557316e+1
+PR = 1.075876003427643e+4

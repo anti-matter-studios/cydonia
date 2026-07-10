@@ -8,7 +8,7 @@ import type { Meta, StoryFn } from "@storybook/react-vite";
 import { useEffect, useRef } from "react";
 import { brand } from "@/lib/utils";
 import { unixTimestampToJulianDateTDB } from "@/lib/math";
-import SystemPeekerView from "@/component/atom/system-peeker-view";
+// import SystemPeekerView from "@/component/atom/system-peeker-view";
 
 
 const meta: Meta<typeof Desktop> = {
@@ -19,7 +19,7 @@ const meta: Meta<typeof Desktop> = {
 };
 export default meta;
 
-export const Desktop: StoryFn<{ useRealtimeView: boolean }> = function({ useRealtimeView }: { useRealtimeView: boolean }) {
+export const Desktop: StoryFn<{ useRealtimeView: boolean }> = function(_: { useRealtimeView: boolean }) {
     const julianDayRef = useRef<HTMLSpanElement>(null);
 
     useEffect(() => {
@@ -261,7 +261,7 @@ export const Desktop: StoryFn<{ useRealtimeView: boolean }> = function({ useReal
                 <h2 className="text-2xl leading-none text-text-primary">System Peeker</h2>
             </header>
 
-            {useRealtimeView ? <SystemPeekerView className="size-full" /> : <svg
+            <svg
                 className="absolute inset-0 size-full"
                 viewBox="0 0 920 680"
                 preserveAspectRatio="xMidYMid meet"
@@ -490,7 +490,7 @@ export const Desktop: StoryFn<{ useRealtimeView: boolean }> = function({ useReal
                     <circle cx="452" cy="618" r="14" fill="#7890b7" opacity="0.75" />
                     <text x="473" y="596" fill="var(--color-text-secondary)" fontSize="12">Neptune</text>
                 </g>
-            </svg>}
+            </svg>
         </section>
 
         <aside className="panel col-start-3 row-span-2 row-start-1 flex min-h-0 flex-col p-5">

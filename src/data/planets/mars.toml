@@ -2,21 +2,27 @@ designation = "499"
 name = "Mars"
 
 [mesh]
-geometry="sphere"
-segments=8
 radius=0.09
+subdivisions=3
+seed=499
+shade-steps=5
+gradient-light="de7042"
+gradient-dark="61241a"
 
-material="gradient"
-from-colour=[0.87, 0.44, 0.26]
-to-colour=[0.38, 0.14, 0.1]
+[mesh.height]
+initialAmplitude=0
+scale=1
+octaves=1
+persistence=0.5
+lacunarity=2
 
 
 [orbit]
-epoch = 2461228
-eccentricity = 9.342639747401188e-2
-meanAnomaly = 53.57327395405513
-semiMajorAxis = 1.523593874353394
-orbitalPeriod = 686.9137086854329
+epoch = 2461232
+eccentricity = 9.3426214900535e-2
+meanAnomaly = 55.66946463277381
+semiMajorAxis = 1.523594081182733
+orbitalPeriod = 686.9138485592362
 
 [orbit.units]
 time = "julian-date-barycentric-dynamical-time-days"
@@ -24,26 +30,26 @@ distance = "astronomical-units"
 angle = "degrees"
 
 [orbit.angles]
-inclination = 1.847485367716051
-longitudeOfAscendingNode = 49.48120003389302
-argumentOfPerihelion = 286.6080625231357
+inclination = 1.84748459909088
+longitudeOfAscendingNode = 49.48120399453644
+argumentOfPerihelion = 286.608234145525
 
 [source]
-time = "2026-07-06T16:03:27.79180749"
+time = "2026-07-10T08:32:20.836340515"
 name = "NASA/JPL Horizons APIv1.2"
 
 [source.data]
-dateJD = 2.461228e+6
-dateUTC = "A.D. 2026-Jul-06 12:00:00.0000 TDB"
-EC = 9.342639747401188e-2
-QR = 1.381249987459084e+0
-IN = 1.847485367716051e+0
-OM = 4.948120003389302e+1
-W = 2.866080625231357e+2
-Tp = 2.4611257771769497e+6
-N = 5.240832952496212e-1
-MA = 5.357327395405513e+1
-TA = 6.278697566585578e+1
-A = 1.523593874353394e+0
-AD = 1.665937761247704e+0
-PR = 6.869137086854329e+2
+JD = 2.461232e+6
+UTC = " A.D. 2026-Jul-10 12:00:00.0000"
+EC = 9.3426214900535e-2
+QR = 1.381250453132972e+0
+IN = 1.84748459909088e+0
+OM = 4.948120399453644e+1
+W = 2.86608234145525e+2
+Tp = 2.461125777427227e+6
+N = 5.240831885324194e-1
+MA = 5.566946463277381e+1
+TA = 6.508881450529702e+1
+A = 1.523594081182733e+0
+AD = 1.665937709232495e+0
+PR = 6.869138485592362e+2

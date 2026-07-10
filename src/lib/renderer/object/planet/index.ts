@@ -3,93 +3,86 @@
  * This product is released under the MIT licence.
  */
 
-
-import {
-    Euler,
-    type IUniform,
-    Object3D, Quaternion,
-    ShaderMaterial,
-    Vector3
-} from "three";
-
+import { Euler, Mesh, Quaternion, Vector3 } from "three";
 import { type GameObject, wrapGameObject } from "@/lib/renderer/object";
-import {
-    convertDegreesOrbitalParameterAnglesToRadians,
-    type PlanetData
-} from "@/lib/schemas";
-import {
-    getBodyPerifocalCoordinatesAtTime,
-    getOrbitPerifocalToWorldQuaternion
-} from "@/lib/orbit";
+import { convertDegreesOrbitalParameterAnglesToRadians, type PlanetData } from "@/lib/schemas";
 
-import { createPlanetOrbit, type PlanetOrbit } from "./orbit";
-import { createPlanetMesh } from "./mesh";
+import { bindPlanetMaterialUniforms, createPlanetMaterial, type PlanetMaterial, type PlanetMaterialOptions } from "./material";
+import { createPlanetGeometry, type PlanetGeometry, type PlanetGeometryOptions } from "./geometry";
 import { degreesToRadians } from "@/lib/math";
 import { brand } from "@/lib/utils";
+import { getBodyPerifocalCoordinatesAtTime, getOrbitPerifocalToWorldQuaternion } from "@/lib/orbit";
+import { PLANET_SCALE_OVERRIDE } from "@/lib/renderer/config";
 
 
-export type { PlanetOrbit } from "./orbit";
+export type { PlanetGeometry, PlanetMaterial, PlanetGeometryOptions, PlanetMaterialOptions };
 
-/** Base game object for all the planets (major and minor) rendered in the system. */
-export interface Planet extends GameObject<Object3D> {
-    /** Reference to the orbital parameters of this planet object. */
-    readonly data: PlanetData;
+/** Game object used to represent a planet in the system. */
+export interface Planet extends GameObject<Mesh<PlanetGeometry, PlanetMaterial>> {
+    /** If set, applies the orbit offset to the position of the mesh. */
+    applyOrbit: boolean;
 
-    /**
-     * The game object used to render the orbit of the planet.
-     * Note that the orbit is NOT attached to its planet and will NOT be rendered by default.
-     */
-    readonly orbit: PlanetOrbit;
+    /** If set, overrides the automatic light position computation. */
+    lightSource: Vector3 | undefined;
 }
 
 /**
  * Creates a new planet game object.
  *
- * @param data The data of the planet to create.
- * @returns The generated planet game object.
+ * @param data The data of the planet to generate.
+ * @returns The generated game object.
  */
 export function createPlanet(data: PlanetData): Planet {
-    const perifocalToWorld = getOrbitPerifocalToWorldQuaternion(
+    let applyOrbit = true;
+    let lightSource: Vector3 | undefined;
+
+    const material = createPlanetMaterial();
+    const mesh = new Mesh(createPlanetGeometry(data.mesh), material);
+    mesh.onBeforeRender = function() {
+        let lightDirection = lightSource?.clone();
+        lightDirection ??= this.position.clone().multiplyScalar(-1);
+
+        // Counter-act the mesh rotation.
+        lightDirection.applyQuaternion(mesh.quaternion.clone().invert());
+
+        bindPlanetMaterialUniforms(material, lightDirection, data.mesh);
+    };
+    mesh.scale.setScalar(PLANET_SCALE_OVERRIDE);
+
+    const worldQuaternion = getOrbitPerifocalToWorldQuaternion(
         convertDegreesOrbitalParameterAnglesToRadians(data.orbit.angles)
     );
-
-    const mesh = createPlanetMesh(data.mesh);
-    const orbit = createPlanetOrbit(data.orbit);
-    const container = new Object3D();
-
-    container.position.applyQuaternion(perifocalToWorld);
-    container.add(mesh);
-    container.add(orbit);
-
-    if (data.rotation) {
-        mesh.quaternion.setFromEuler(new Euler(0, degreesToRadians(data.rotation.tilt), 0));
+    if (data.rotation?.tilt) {
+        mesh.quaternion.setFromEuler(
+            new Euler(degreesToRadians(data.rotation.tilt), 0, 0)
+        );
     }
 
-    return wrapGameObject(container, {
-        get data() {
-            return data;
+    return wrapGameObject(mesh, {
+        get applyOrbit() {
+            return applyOrbit;
         },
-        get orbit() {
-            return orbit;
+        set applyOrbit(value) {
+            applyOrbit = value;
         },
-        update() {
-            if (data.mesh.material === "gradient") {
-                const material = mesh.material as ShaderMaterial;
-                const uniform = material.uniforms.uLightDirection as IUniform<Vector3>;
-                const rotationInverseQuaternion = mesh.quaternion.clone().invert();
-                const lightNormal = mesh.position.clone().applyQuaternion(rotationInverseQuaternion).multiplyScalar(-1);
-                uniform.value.copy(lightNormal);
-            }
+        get lightSource() {
+            return lightSource;
         },
-        simulationUpdate(state, deltaTime) {
-            mesh.position.copy(getBodyPerifocalCoordinatesAtTime(state.wallClockJD, data.orbit));
-
-            if (data.rotation) {
-                const amount = new Quaternion().setFromAxisAngle(
+        set lightSource(value) {
+            lightSource = value;
+        },
+        simulationUpdate(state, deltaTimeSeconds) {
+            if (data.rotation?.rate) {
+                mesh.quaternion.multiply(new Quaternion().setFromAxisAngle(
                     new Vector3(0, 0, 1),
-                    degreesToRadians(brand(data.rotation.rate * (deltaTime / 86400)))
-                );
-                mesh.quaternion.multiply(amount);
+                    degreesToRadians(brand(data.rotation.rate * deltaTimeSeconds / 86_400))
+                ));
+            }
+
+            if (applyOrbit) {
+                this.position
+                    .copy(getBodyPerifocalCoordinatesAtTime(state.wallClockJD, data.orbit))
+                    .applyQuaternion(worldQuaternion);
             }
         }
     });

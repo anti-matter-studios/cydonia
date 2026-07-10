@@ -24,13 +24,14 @@
     },
     "dependencies": {
         "@js-temporal/polyfill": "^0.5.1",
+        "@storybook/react": "^10.4.6",
+        "ajv": "^8.20.0",
+        "ajv-formats": "^3.0.1",
         "classnames": "^2.5.1",
         "i18next": "^26.3.4",
         "react": "^19.2.7",
         "react-dom": "^19.2.7",
         "react-i18next": "^17.0.8",
-        "ajv": "^8.20.0",
-        "ajv-formats": "^3.0.1",
         "three": "^0.185.1"
     },
     "devDependencies": {

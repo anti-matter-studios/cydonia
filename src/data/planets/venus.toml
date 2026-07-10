@@ -2,20 +2,26 @@ designation = "299"
 name = "Venus"
 
 [mesh]
-geometry="sphere"
-segments=8
 radius=0.075
+subdivisions=3
+seed=299
+shade-steps=5
+gradient-light="edc478"
+gradient-dark="8c5c2e"
 
-material="gradient"
-from-colour=[0.93, 0.77, 0.47]
-to-colour=[0.55, 0.36, 0.18]
+[mesh.height]
+initialAmplitude=0
+scale=1
+octaves=1
+persistence=0.5
+lacunarity=2
 
 [orbit]
-epoch = 2461228
-eccentricity = 6.781743121038652e-3
-meanAnomaly = 83.97063296973303
-semiMajorAxis = 0.7233248800793334
-orbitalPeriod = 224.6973760515764
+epoch = 2461232
+eccentricity = 6.781357397441348e-3
+meanAnomaly = 90.37753233618284
+semiMajorAxis = 0.7233250171361285
+orbitalPeriod = 224.6974399156253
 
 [orbit.units]
 time = "julian-date-barycentric-dynamical-time-days"
@@ -23,26 +29,26 @@ distance = "astronomical-units"
 angle = "degrees"
 
 [orbit.angles]
-inclination = 3.394372284799014
-longitudeOfAscendingNode = 76.60654337644566
-argumentOfPerihelion = 54.83257176036776
+inclination = 3.394372009135278
+longitudeOfAscendingNode = 76.6065468687392
+argumentOfPerihelion = 54.83433267125654
 
 [source]
-time = "2026-07-06T16:03:29.005808695"
+time = "2026-07-10T08:32:22.76834246"
 name = "NASA/JPL Horizons APIv1.2"
 
 [source.data]
-dateJD = 2.461228e+6
-dateUTC = "A.D. 2026-Jul-06 12:00:00.0000 TDB"
-EC = 6.781743121038652e-3
-QR = 7.184194765495793e-1
-IN = 3.394372284799014e+0
-OM = 7.660654337644566e+1
-W = 5.483257176036776e+1
-Tp = 2.461175588941962e+6
-N = 1.602154890840232e+0
-MA = 8.397063296973303e+1
-TA = 8.474412978816876e+1
-A = 7.233248800793334e-1
-AD = 7.282302836090875e-1
-PR = 2.246973760515764e+2
+JD = 2.461232e+6
+UTC = " A.D. 2026-Jul-10 12:00:00.0000"
+EC = 6.781357397441348e-3
+QR = 7.18419891680418e-1
+IN = 3.394372009135278e+0
+OM = 7.66065468687392e+1
+W = 5.483433267125654e+1
+Tp = 2.461175589999606e+6
+N = 1.6021544354719e+0
+MA = 9.037753233618284e+1
+TA = 9.115453456647128e+1
+A = 7.233250171361285e-1
+AD = 7.282301425918389e-1
+PR = 2.246974399156253e+2

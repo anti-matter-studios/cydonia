@@ -11,15 +11,11 @@ import {
     SCENE_HEIGHT_SCALE
 } from "@/lib/renderer/config";
 import { type GameObject, wrapGameObject } from "../object";
-import type { OrbitalParameters } from "@/lib/schemas";
+import type { PlanetData } from "@/lib/schemas";
 import { easeInOutCubic } from "@/lib/math";
 
-
-/** Camera used by the system peeker to render the entire system. */
-export interface Camera extends GameObject<OrthographicCamera> {
-    /** The designation of the currently tracked body, if any. */
-    readonly trackedBodyDesignation?: string;
-
+/** API exposed to manipulate the {@link Camera} object. */
+export interface CameraAPI {
     /**
      * Resizes the viewport of the camera to match the aspect ratio for the provided canvas size.
      *
@@ -44,6 +40,12 @@ export interface Camera extends GameObject<OrthographicCamera> {
     stopTracking(): void;
 }
 
+/** Camera used by the system peeker to render the entire system. */
+export interface Camera extends GameObject<OrthographicCamera>, CameraAPI {
+    /** The designation of the currently tracked body, if any. */
+    readonly trackedBodyDesignation?: string;
+}
+
 /**
  * Creates a new camera object.
  *
@@ -63,10 +65,6 @@ export function createCamera(): Camera {
         CAMERA_DEFAULT_CLIP_PLANES.far
     );
     camera.position.set(0, 0, CAMERA_DEFAULT_CLIP_PLANES.far / 2);
-
-    const trackingState = {
-        tracked: null
-    };
 
     let tracked: string | undefined;
     let currentProgress = 0;
@@ -121,19 +119,13 @@ export function createCamera(): Camera {
             }
 
             // Get the target position of the tracked target.
-            const parameters = state.bodies[tracked] as OrbitalParameters | undefined;
+            const parameters = state.bodies[tracked] as PlanetData | undefined;
             if (!parameters) {
                 console.error("Cannot find body with designation \"%s\"", tracked);
                 return;
             }
-            targetPosition = getBodyPerifocalCoordinatesAtTime(state.wallClockJD, parameters)
+            targetPosition = getBodyPerifocalCoordinatesAtTime(state.wallClockJD, parameters.orbit)
                 .add(new Vector3(0, 0, CAMERA_DEFAULT_CLIP_PLANES.far / 2));
         }
     });
-}
-
-interface CameraTrackingState {
-    trackedBody: string | null;
-    progress: number;
-    
 }

@@ -1,236 +1,232 @@
 {
     "$schema": "https://json-schema.org/draft/2020-12/schema#",
     "$id": "https://anti-matter.studio/schemas/data/mesh.schema.json",
+    "type": "object",
     "description": "Schema used to validate the mesh data provided to render a planet.",
     "$defs": {
         "colour-source": {
-            "description": "A colour used in some material.",
+            "type": "string",
+            "description": "A six-digit hexadecimal colour value.",
+            "pattern": "#?[0-9a-fA-F]{6}"
+        },
+        "random-generator-seed": {
+            "description": "Seed used for deterministic random generation.",
             "oneOf": [
                 {
-                    "type": "string",
-                    "description": "A hexadecimal definition of the colour.",
-                    "pattern": "#?[0-9a-f]{6}"
+                    "type": "number"
                 },
                 {
+                    "type": "string"
+                }
+            ]
+        },
+        "layered-simplex-noise-options": {
+            "type": "object",
+            "description": "Options used when sampling multiple Simplex noise octaves.",
+            "properties": {
+                "initialAmplitude": {
+                    "type": "number",
+                    "description": "Output amplitude after octave normalisation.",
+                    "minimum": 0
+                },
+                "offset": {
                     "type": "array",
-                    "description": "An array of three numbers representing the RGB values of the colour.",
+                    "description": "Domain offset applied after frequency scaling.",
                     "items": {
-                        "type": "number",
-                        "minimum": 0,
-                        "maximum": 1
+                        "type": "number"
                     },
                     "minItems": 3,
                     "maxItems": 3
+                },
+                "scale": {
+                    "type": "number",
+                    "description": "Frequency of the first octave."
+                },
+                "octaves": {
+                    "type": "integer",
+                    "description": "Number of octaves to blend together.",
+                    "minimum": 0
+                },
+                "persistence": {
+                    "type": "number",
+                    "description": "Amplitude multiplier between octaves."
+                },
+                "lacunarity": {
+                    "type": "number",
+                    "description": "Frequency multiplier between octaves."
                 }
-            ]
+            },
+            "additionalProperties": false
         },
-        "sphere-geometry": {
+        "geology-count-range": {
             "type": "object",
-            "description": "Sphere geometry used to render a planet.",
+            "description": "Inclusive integer range used when picking a random amount of features.",
             "properties": {
-                "geometry": {
-                    "type": "string",
-                    "description": "The type of geometry.",
-                    "enum": ["sphere"]
+                "min": {
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "max": {
+                    "type": "integer",
+                    "minimum": 0
+                }
+            },
+            "additionalProperties": false
+        },
+        "geology-range": {
+            "type": "object",
+            "description": "Inclusive numeric range used when randomising geological feature parameters.",
+            "properties": {
+                "min": {
+                    "type": "number"
+                },
+                "max": {
+                    "type": "number"
+                }
+            },
+            "additionalProperties": false
+        },
+        "geology-mountains": {
+            "type": "object",
+            "description": "Procedural mountain peak generation options.",
+            "properties": {
+                "count": {
+                    "$ref": "#/$defs/geology-count-range"
+                },
+                "height": {
+                    "$ref": "#/$defs/geology-range",
+                    "description": "Peak height as a fraction of the local radius."
                 },
                 "radius": {
-                    "type": "number",
-                    "description": "The radius of the sphere.",
-                    "minimum": 0
+                    "$ref": "#/$defs/geology-range",
+                    "description": "Peak angular radius in radians on the unit sphere."
                 },
-                "segments": {
-                    "type": "integer",
-                    "description": "The number of segments used to render the sphere.",
-                    "minimum": 1,
-                    "maximum": 10
+                "sharpness": {
+                    "$ref": "#/$defs/geology-range",
+                    "description": "Higher values produce steeper, sharper peaks."
                 }
             },
-            "additionalProperties": true,
-            "required": ["geometry", "radius", "segments"]
+            "additionalProperties": false
         },
-        "icosahedron-geometry": {
+        "geology-craters": {
             "type": "object",
-            "description": "Icosahedron geometry used to render a planet.",
+            "description": "Procedural crater generation options.",
             "properties": {
-                "geometry": {
-                    "type": "string",
-                    "description": "The type of geometry.",
-                    "enum": ["icosahedron"]
+                "count": {
+                    "$ref": "#/$defs/geology-count-range"
+                },
+                "depth": {
+                    "$ref": "#/$defs/geology-range",
+                    "description": "Crater floor depth as a fraction of the local radius."
                 },
                 "radius": {
-                    "type": "number",
-                    "description": "The radius of the mesh",
-                    "minimum": 0
+                    "$ref": "#/$defs/geology-range",
+                    "description": "Crater angular radius in radians on the unit sphere."
                 },
-                "details": {
-                    "type": "integer",
-                    "description": "The number of subdibisions used to render the icosahedron.",
-                    "minimum": 1,
-                    "maximum": 10
+                "rimHeight": {
+                    "$ref": "#/$defs/geology-range",
+                    "description": "Raised rim height as a fraction of the local radius."
+                },
+                "rimWidth": {
+                    "$ref": "#/$defs/geology-range",
+                    "description": "Rim width as a fraction of the crater radius."
                 }
             },
-            "additionalProperties": true,
-            "required": ["geometry"]
+            "additionalProperties": false
         },
-        "octahedron-geometry": {
+        "geology-ravines": {
             "type": "object",
-            "description": "Octahedron geometry used to render a planet.",
+            "description": "Procedural ravine trench generation options.",
             "properties": {
-                "geometry": {
-                    "type": "string",
-                    "description": "The type of geometry.",
-                    "enum": ["octahedron"]
+                "count": {
+                    "$ref": "#/$defs/geology-count-range"
                 },
-                "radius":{
-                    "type": "number",
-                    "description": "The radius of the mesh",
-                    "minimum": 0
+                "depth": {
+                    "$ref": "#/$defs/geology-range",
+                    "description": "Ravine depth as a fraction of the local radius."
                 },
-                "details": {
-                    "type": "integer",
-                    "description": "The number of subdibisions used to render the octahedron.",
-                    "minimum": 1,
-                    "maximum": 10
+                "depthVariation": {
+                    "$ref": "#/$defs/geology-range",
+                    "description": "Fractional variation applied along each ravine's length."
+                },
+                "length": {
+                    "$ref": "#/$defs/geology-range",
+                    "description": "Ravine angular length in radians on the unit sphere."
+                },
+                "rimHeight": {
+                    "$ref": "#/$defs/geology-range",
+                    "description": "Raised shoulder height as a fraction of the local radius."
+                },
+                "width": {
+                    "$ref": "#/$defs/geology-range",
+                    "description": "Ravine half-width in radians on the unit sphere."
                 }
             },
-            "additionalProperties": true,
-            "required": ["geometry"]
+            "additionalProperties": false
         },
-        "minor-planet-geometry": {
+        "geology-options": {
             "type": "object",
-            "description": "Procedural low-poly geometry used to render minor planets.",
+            "description": "Procedural terrain features applied before height displacement.",
             "properties": {
-                "geometry": {
-                    "type": "string",
-                    "description": "The type of geometry.",
-                    "enum": ["minor-planet"]
+                "mountains": {
+                    "$ref": "#/$defs/geology-mountains"
                 },
-                "radius": {
-                    "type": "number",
-                    "description": "The base radius of the minor planet.",
-                    "minimum": 0
+                "craters": {
+                    "$ref": "#/$defs/geology-craters"
                 },
-                "details": {
-                    "type": "integer",
-                    "description": "The number of subdivisions used to render the source icosahedron.",
-                    "minimum": 0,
-                    "maximum": 10
-                },
-                "height-scale": {
-                    "type": "number",
-                    "description": "The Simplex height displacement as a fraction of the radius.",
-                    "minimum": 0,
-                    "maximum": 0.5
-                },
-                "noise-scale": {
-                    "type": "number",
-                    "description": "The frequency of the first Simplex noise octave.",
-                    "minimum": 0
-                },
-                "noise-octaves": {
-                    "type": "integer",
-                    "description": "The number of Simplex noise octaves blended into the heightmap.",
-                    "minimum": 1,
-                    "maximum": 8
-                },
-                "seed": {
-                    "type": "integer",
-                    "description": "The deterministic seed used when generating the heightmap."
+                "ravines": {
+                    "$ref": "#/$defs/geology-ravines"
                 }
             },
-            "additionalProperties": true,
-            "required": ["geometry"]
-        },
-        "custom-geometry": {
-            "type": "object",
-            "description": "Custom geometry used to render a planet.",
-            "properties": {
-                "geometry": {
-                    "type": "string",
-                    "description": "The type of geometry.",
-                    "enum": ["custom"]
-                },
-                "points": {
-                    "type": "array",
-                    "description": "List of points used to render the custom geometry.",
-                    "items": {
-                        "type": "array",
-                        "items": {
-                            "type": "number"
-                        },
-                        "minItems": 3,
-                        "maxItems": 3
-                    }
-                },
-                "indices": {
-                    "type": "array",
-                    "description": "List of indices used to render the custom geometry.",
-                    "items": {
-                        "type": "integer"
-                    }
-                }
-            },
-            "additionalProperties": true,
-            "required": ["geometry", "points"]
-        },
-        "basic-material": {
-            "type": "object",
-            "description": "Basic material used to render the mesh.",
-            "properties": {
-                "material": {
-                    "type": "string",
-                    "description": "The type of material.",
-                    "enum": ["basic"]
-                },
-                "colour": {
-                    "$ref": "#/$defs/colour-source"
-                },
-                "wireframe": {
-                    "type": "boolean",
-                    "description": "Whether to render the mesh as a wireframe."
-                }
-            },
-            "additionalProperties": true,
-            "required": ["material", "colour"]
-        },
-        "gradient-material": {
-            "type": "object",
-            "description": "Material used to render a gradient on the surface.",
-            "properties": {
-                "material": {
-                    "type": "string",
-                    "description": "The type of material.",
-                    "enum": ["gradient"]
-                },
-                "from-colour": {
-                    "$ref": "#/$defs/colour-source"
-                },
-                "to-colour": {
-                    "$ref": "#/$defs/colour-source"
-                },
-                "wireframe": {
-                    "type": "boolean",
-                    "description": "Whether to render the mesh as a wireframe."
-                }
-            },
-            "additionalProperties": true,
-            "required": ["material", "from-colour", "to-colour"]
-        },
-        "geometry": {
-            "oneOf": [
-                {"$ref": "#/$defs/sphere-geometry"},
-                {"$ref": "#/$defs/icosahedron-geometry"},
-                {"$ref": "#/$defs/octahedron-geometry"},
-                {"$ref": "#/$defs/minor-planet-geometry"},
-                {"$ref": "#/$defs/custom-geometry"}
-            ]
-        },
-        "material": {
-            "oneOf": [
-                {"$ref": "#/$defs/basic-material"},
-                {"$ref": "#/$defs/gradient-material"}
-            ]
+            "additionalProperties": false
         }
     },
-    "allOf": [{"$ref": "#/$defs/geometry"}, {"$ref": "#/$defs/material"}]
+    "properties": {
+        "radius": {
+            "type": "number",
+            "description": "Radius of the planet object, for the initial icosahedron subdivision.",
+            "minimum": 0
+        },
+        "subdivisions": {
+            "type": "integer",
+            "description": "Number of subdivisions applied to the icosahedron.",
+            "minimum": 0
+        },
+        "seed": {
+            "$ref": "#/$defs/random-generator-seed"
+        },
+        "height": {
+            "$ref": "#/$defs/layered-simplex-noise-options",
+            "description": "Simplex parameters of the height displacement map."
+        },
+        "geology": {
+            "$ref": "#/$defs/geology-options"
+        },
+        "tangent": {
+            "$ref": "#/$defs/layered-simplex-noise-options",
+            "description": "Simplex parameters used for the tangent displacement map."
+        },
+        "specular-light": {
+            "$ref": "#/$defs/colour-source",
+            "description": "Hexadecimal colour of the specular light reflection."
+        },
+        "specular-threshold": {
+            "type": "number",
+            "description": "Threshold for the specular reflection."
+        },
+        "shade-steps": {
+            "type": "number",
+            "description": "Number of shading steps applied to the gradient."
+        },
+        "gradient-light": {
+            "$ref": "#/$defs/colour-source",
+            "description": "Light colour value of the gradient for the planet."
+        },
+        "gradient-dark": {
+            "$ref": "#/$defs/colour-source",
+            "description": "Dark colour value of the gradient for the planet."
+        }
+    },
+    "additionalProperties": false,
+    "required": ["seed", "height", "gradient-light", "gradient-dark"]
 }

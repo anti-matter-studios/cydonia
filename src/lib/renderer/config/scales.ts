@@ -10,4 +10,7 @@
 export const SCENE_HEIGHT_SCALE = 1;
 
 /** The size of one astronomical unit in the current scene. */
-export const ASTRONOMICAL_UNIT_SCALE = 10;
+export const ASTRONOMICAL_UNIT_SCALE = 50;
+
+/** Override applied to all the planet bodies. */
+export const PLANET_SCALE_OVERRIDE = 1;

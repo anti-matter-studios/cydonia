@@ -3,25 +3,52 @@
  * This product is released under the MIT licence.
  */
 
-import { createRendererResources } from "./resources";
-import { createScene } from "./object/scene";
-import { createPlanet, type Planet } from "@/lib/renderer/object/planet";
-import type { SimulationState } from "@/lib/renderer/simulation/state";
-import type { PlanetData } from "@/lib/schemas";
-import { brand } from "@/lib/utils";
-import { unixTimestampToJulianDateTDB, type UnixTimestampUTC } from "@/lib/math";
+import type { Object3D } from "three";
 
+
+import type { CameraAPI } from "./control/camera";
+import { createScene } from "./object/scene";
+import { createRendererResources } from "./resources";
+import type { GameObject } from "./object";
+import type { SimulationState } from "./state";
+
+
+export type {
+    PlanetGeometry, PlanetGeometryOptions, PlanetMaterialOptions, PlanetMaterial, Planet, GameObject, Sun
+} from "./object";
 
 /** Three.JS-based renderer that can simulate the state of the system. */
-export interface SystemPeekerSimulator {
-    render(deltaTime: number): void;
-    resize(width: number, height: number): void;
-    dispose(): void;
+export interface SystemPeekerSimulator extends CameraAPI {
+    /**
+     * Renders a frame of the scene and presents it to the target canvas.
+     *
+     * @param deltaTimeSeconds The time, in seconds, elapsed since the last frame.
+     */
+    render(deltaTimeSeconds: number): void;
 
-    track(planetDesignation: string): void;
-    stopTracking(): void;
-    addPlanet(planet: PlanetData): void;
-    setSimulationTime(wallClockUTC: UnixTimestampUTC): void;
+    /**
+     * Adds a new object to the scene.
+     *
+     * @param object The object that should be added to the scene.
+     */
+    add<T extends GameObject<Object3D>>(object: T): T;
+
+    /**
+     * Removes a game object from the scene.
+     *
+     * @param object The object that should be removed from the scene.
+     */
+    remove(object: GameObject<Object3D>): void;
+
+    /**
+     * Updates the simulation state.
+     *
+     * @param state The new state of the simulation.
+     */
+    updateSimulationState(state: SimulationState): void;
+
+    /** Disposes of the resources used by the simulator. */
+    dispose(): void;
 }
 
 /**
@@ -33,44 +60,35 @@ export interface SystemPeekerSimulator {
 export function createSystemPeekerSimulator(target: HTMLCanvasElement | OffscreenCanvas): SystemPeekerSimulator {
     const resources = createRendererResources(target);
     const scene = createScene();
-    const state: SimulationState = {
-        wallClockUTC: brand(Date.now()),
-        wallClockJD: unixTimestampToJulianDateTDB(brand(Date.now())),
-        bodies: {},
-    };
 
-    const planets = new Map<string, Planet>();
+    let previousUpdateTimeSconds: number | undefined;
 
     return {
         render(deltaTime) {
             scene.update?.(deltaTime);
             resources.render(scene, scene.camera);
         },
+        dispose() {
+            resources.dispose();
+        },
+        add(object) {
+            scene.add(object);
+            return object;
+        },
+        remove(object) {
+            scene.remove(object);
+        },
+        updateSimulationState(state) {
+            const nowInSeconds = state.wallClockUTC / 1000;
+            const deltaTimeSeconds = previousUpdateTimeSconds ? nowInSeconds - previousUpdateTimeSconds : 0;
+            scene.simulationUpdate?.(state, deltaTimeSeconds);
+            previousUpdateTimeSconds = nowInSeconds;
+        },
         resize(width, height) {
             resources.resize(width, height);
             scene.camera.resize(width, height);
         },
-        dispose() {
-            resources.dispose();
-        },
-        track(planetDesignation) {
-            scene.camera.track(planetDesignation);
-        },
-        stopTracking() {
-            scene.camera.stopTracking();
-        },
-        addPlanet(descriptor) {
-            const planet = createPlanet(descriptor);
-            planets.set(descriptor.designation, planet);
-            scene.add(planet);
-            scene.add(planet.orbit);
-            state.bodies[descriptor.designation] = descriptor.orbit;
-        },
-        setSimulationTime(time) {
-            const deltaTime = (time - state.wallClockUTC) / 1000;
-            state.wallClockUTC = time;
-            state.wallClockJD = unixTimestampToJulianDateTDB(time);
-            scene.simulationUpdate?.(state, deltaTime);
-        }
+        track: scene.camera.track.bind(scene.camera),
+        stopTracking: scene.camera.stopTracking.bind(scene.camera)
     };
 }

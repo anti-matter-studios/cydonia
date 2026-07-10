@@ -4,8 +4,9 @@
  */
 
 import type { OrbitalParameters, PlanetMesh } from "@/lib/schemas";
-import PlanetDataSchema from "./planet.schema.json";
 import type { Degrees } from "@/lib/math";
+
+import PlanetDataSchema from "./planet.schema.json";
 
 
 /** Object used to describe the source of a planet's orbit data. */
