@@ -1,0 +1,232 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema#",
+    "$id": "https://anti-matter.studio/schemas/data/mesh.schema.json",
+    "type": "object",
+    "description": "Schema used to validate the mesh data provided to render a planet.",
+    "$defs": {
+        "colour-source": {
+            "type": "string",
+            "description": "A six-digit hexadecimal colour value.",
+            "pattern": "#?[0-9a-fA-F]{6}"
+        },
+        "random-generator-seed": {
+            "description": "Seed used for deterministic random generation.",
+            "oneOf": [
+                {
+                    "type": "number"
+                },
+                {
+                    "type": "string"
+                }
+            ]
+        },
+        "layered-simplex-noise-options": {
+            "type": "object",
+            "description": "Options used when sampling multiple Simplex noise octaves.",
+            "properties": {
+                "initialAmplitude": {
+                    "type": "number",
+                    "description": "Output amplitude after octave normalisation.",
+                    "minimum": 0
+                },
+                "offset": {
+                    "type": "array",
+                    "description": "Domain offset applied after frequency scaling.",
+                    "items": {
+                        "type": "number"
+                    },
+                    "minItems": 3,
+                    "maxItems": 3
+                },
+                "scale": {
+                    "type": "number",
+                    "description": "Frequency of the first octave."
+                },
+                "octaves": {
+                    "type": "integer",
+                    "description": "Number of octaves to blend together.",
+                    "minimum": 0
+                },
+                "persistence": {
+                    "type": "number",
+                    "description": "Amplitude multiplier between octaves."
+                },
+                "lacunarity": {
+                    "type": "number",
+                    "description": "Frequency multiplier between octaves."
+                }
+            },
+            "additionalProperties": false
+        },
+        "geology-count-range": {
+            "type": "object",
+            "description": "Inclusive integer range used when picking a random amount of features.",
+            "properties": {
+                "min": {
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "max": {
+                    "type": "integer",
+                    "minimum": 0
+                }
+            },
+            "additionalProperties": false
+        },
+        "geology-range": {
+            "type": "object",
+            "description": "Inclusive numeric range used when randomising geological feature parameters.",
+            "properties": {
+                "min": {
+                    "type": "number"
+                },
+                "max": {
+                    "type": "number"
+                }
+            },
+            "additionalProperties": false
+        },
+        "geology-mountains": {
+            "type": "object",
+            "description": "Procedural mountain peak generation options.",
+            "properties": {
+                "count": {
+                    "$ref": "#/$defs/geology-count-range"
+                },
+                "height": {
+                    "$ref": "#/$defs/geology-range",
+                    "description": "Peak height as a fraction of the local radius."
+                },
+                "radius": {
+                    "$ref": "#/$defs/geology-range",
+                    "description": "Peak angular radius in radians on the unit sphere."
+                },
+                "sharpness": {
+                    "$ref": "#/$defs/geology-range",
+                    "description": "Higher values produce steeper, sharper peaks."
+                }
+            },
+            "additionalProperties": false
+        },
+        "geology-craters": {
+            "type": "object",
+            "description": "Procedural crater generation options.",
+            "properties": {
+                "count": {
+                    "$ref": "#/$defs/geology-count-range"
+                },
+                "depth": {
+                    "$ref": "#/$defs/geology-range",
+                    "description": "Crater floor depth as a fraction of the local radius."
+                },
+                "radius": {
+                    "$ref": "#/$defs/geology-range",
+                    "description": "Crater angular radius in radians on the unit sphere."
+                },
+                "rimHeight": {
+                    "$ref": "#/$defs/geology-range",
+                    "description": "Raised rim height as a fraction of the local radius."
+                },
+                "rimWidth": {
+                    "$ref": "#/$defs/geology-range",
+                    "description": "Rim width as a fraction of the crater radius."
+                }
+            },
+            "additionalProperties": false
+        },
+        "geology-ravines": {
+            "type": "object",
+            "description": "Procedural ravine trench generation options.",
+            "properties": {
+                "count": {
+                    "$ref": "#/$defs/geology-count-range"
+                },
+                "depth": {
+                    "$ref": "#/$defs/geology-range",
+                    "description": "Ravine depth as a fraction of the local radius."
+                },
+                "depthVariation": {
+                    "$ref": "#/$defs/geology-range",
+                    "description": "Fractional variation applied along each ravine's length."
+                },
+                "length": {
+                    "$ref": "#/$defs/geology-range",
+                    "description": "Ravine angular length in radians on the unit sphere."
+                },
+                "rimHeight": {
+                    "$ref": "#/$defs/geology-range",
+                    "description": "Raised shoulder height as a fraction of the local radius."
+                },
+                "width": {
+                    "$ref": "#/$defs/geology-range",
+                    "description": "Ravine half-width in radians on the unit sphere."
+                }
+            },
+            "additionalProperties": false
+        },
+        "geology-options": {
+            "type": "object",
+            "description": "Procedural terrain features applied before height displacement.",
+            "properties": {
+                "mountains": {
+                    "$ref": "#/$defs/geology-mountains"
+                },
+                "craters": {
+                    "$ref": "#/$defs/geology-craters"
+                },
+                "ravines": {
+                    "$ref": "#/$defs/geology-ravines"
+                }
+            },
+            "additionalProperties": false
+        }
+    },
+    "properties": {
+        "radius": {
+            "type": "number",
+            "description": "Radius of the planet object, for the initial icosahedron subdivision.",
+            "minimum": 0
+        },
+        "subdivisions": {
+            "type": "integer",
+            "description": "Number of subdivisions applied to the icosahedron.",
+            "minimum": 0
+        },
+        "seed": {
+            "$ref": "#/$defs/random-generator-seed"
+        },
+        "height": {
+            "$ref": "#/$defs/layered-simplex-noise-options",
+            "description": "Simplex parameters of the height displacement map."
+        },
+        "geology": {
+            "$ref": "#/$defs/geology-options"
+        },
+        "tangent": {
+            "$ref": "#/$defs/layered-simplex-noise-options",
+            "description": "Simplex parameters used for the tangent displacement map."
+        },
+        "specular-light": {
+            "$ref": "#/$defs/colour-source",
+            "description": "Hexadecimal colour of the specular light reflection."
+        },
+        "specular-threshold": {
+            "type": "number",
+            "description": "Threshold for the specular reflection."
+        },
+        "shade-steps": {
+            "type": "number",
+            "description": "Number of shading steps applied to the gradient."
+        },
+        "gradient-light": {
+            "$ref": "#/$defs/colour-source",
+            "description": "Light colour value of the gradient for the planet."
+        },
+        "gradient-dark": {
+            "$ref": "#/$defs/colour-source",
+            "description": "Dark colour value of the gradient for the planet."
+        }
+    },
+    "additionalProperties": false,
+    "required": ["seed", "height", "gradient-light", "gradient-dark"]
+}

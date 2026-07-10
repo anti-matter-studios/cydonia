@@ -1,0 +1,91 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema#",
+    "$id": "https://anti-matter.studio/schemas/data/orbital-parameters.schema.json",
+    "description": "Schema used to validate orbital parameters for computation.",
+    "$defs": {
+        "units": {
+            "type": "object",
+            "description": "The various units used for the orbital parameters.",
+            "properties": {
+                "time": {
+                    "type": "string",
+                    "enum": ["julian-date-barycentric-dynamical-time-days"],
+                    "description": "The unit used for time measurements in the orbital parameters."
+                },
+                "distance": {
+                    "type": "string",
+                    "enum": ["astronomical-units"],
+                    "description": "The unit used for distance measurements in the orbital parameters."
+                },
+                "angle": {
+                    "type": "string",
+                    "enum": ["radians", "degrees"],
+                    "description": "The unit used for angle measurements in the orbital parameters."
+                }
+            },
+            "additionalProperties": false,
+            "required": ["time", "distance", "angle"]
+        },
+        "angles": {
+            "type": "object",
+            "description": "The angles used to describe the orbit's offset from its parent plane.",
+            "properties": {
+                "inclination": {
+                    "type": "number",
+                    "description": "The inclination of the orbit relative to the parent plane."
+                },
+                "longitudeOfAscendingNode": {
+                    "type": "number",
+                    "description": "The longitude of the ascending node of the orbit."
+                },
+                "argumentOfPerihelion": {
+                    "type": "number",
+                    "description": "The argument of perihelion of the orbit."
+                }
+            },
+            "additionalProperties": false,
+            "required": ["inclination", "longitudeOfAscendingNode", "argumentOfPerihelion"]
+        }
+    },
+    "type": "object",
+    "properties": {
+        "units": {
+            "$ref": "#/$defs/units"
+        },
+        "epoch": {
+            "type": "number",
+            "description": "The epoch time at which the orbital parameters have been computed."
+        },
+        "meanAnomaly": {
+            "type": "number",
+            "description": "The mean anomaly of the orbit at the current epoch.",
+            "minimum": 0
+        },
+        "eccentricity": {
+            "type": "number",
+            "description": "The eccentricity of the orbit, where 0 represents a circular orbit and values closer to 1 represent more elliptical orbits.",
+            "minimum": 0
+        },
+        "semiMajorAxis": {
+            "type": "number",
+            "description": "The semi-major axis of the orbit.",
+            "minimum": 0
+        },
+        "orbitalPeriod": {
+            "type": "number",
+            "description": "The orbital period of the object, in days.",
+            "minimum": 0
+        },
+        "angles": {
+            "$ref": "#/$defs/angles"
+        }
+    },
+    "additionalProperties": false,
+    "required": [
+        "epoch",
+        "angles",
+        "eccentricity",
+        "semiMajorAxis",
+        "orbitalPeriod"
+    ]
+}

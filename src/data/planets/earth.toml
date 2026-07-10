@@ -1,0 +1,54 @@
+designation = "399"
+name = "Earth"
+
+[mesh]
+radius=0.1
+subdivisions=3
+seed=399
+shade-steps=5
+gradient-light="59bfff"
+gradient-dark="143366"
+
+[mesh.height]
+initialAmplitude=0
+scale=1
+octaves=1
+persistence=0.5
+lacunarity=2
+
+[orbit]
+epoch = 2461232
+eccentricity = 1.606514599092237e-2
+meanAnomaly = 184.0501884064994
+semiMajorAxis = 1.000574324304311
+orbitalPeriod = 365.5710583797033
+
+[orbit.units]
+time = "julian-date-barycentric-dynamical-time-days"
+distance = "astronomical-units"
+angle = "degrees"
+
+[orbit.angles]
+inclination = 0.003398312432917056
+longitudeOfAscendingNode = 170.5421621007497
+argumentOfPerihelion = 293.4274873895256
+
+[source]
+time = "2026-07-10T08:32:24.084343792"
+name = "NASA/JPL Horizons APIv1.2"
+
+[source.data]
+JD = 2.461232e+6
+UTC = " A.D. 2026-Jul-10 12:00:00.0000"
+EC = 1.606514599092237e-2
+QR = 9.84499951709594e-1
+IN = 3.398312432917056e-3
+OM = 1.705421621007497e+2
+W = 2.934274873895256e+2
+Tp = 2.461410672663461e+6
+N = 9.847606689534024e-1
+MA = 1.840501884064994e+2
+TA = 1.839227185029395e+2
+A = 1.000574324304311e+0
+AD = 1.016648696899029e+0
+PR = 3.655710583797033e+2

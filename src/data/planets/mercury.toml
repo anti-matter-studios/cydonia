@@ -1,0 +1,54 @@
+designation = "199"
+name = "Mercury"
+
+[mesh]
+radius=0.04
+subdivisions=3
+seed=199
+shade-steps=5
+gradient-light="b8b09e"
+gradient-dark="57524d"
+
+[mesh.height]
+initialAmplitude=0
+scale=1
+octaves=1
+persistence=0.5
+lacunarity=2
+
+[orbit]
+epoch = 2461232
+eccentricity = 2.056371774294365e-1
+meanAnomaly = 217.2386586146031
+semiMajorAxis = 0.387098164408357
+orbitalPeriod = 87.96908175629328
+
+[orbit.units]
+time = "julian-date-barycentric-dynamical-time-days"
+distance = "astronomical-units"
+angle = "degrees"
+
+[orbit.angles]
+inclination = 7.003376597981388
+longitudeOfAscendingNode = 48.29761410521125
+argumentOfPerihelion = 29.20140382391587
+
+[source]
+time = "2026-07-10T08:32:23.792343484"
+name = "NASA/JPL Horizons APIv1.2"
+
+[source.data]
+JD = 2.461232e+6
+UTC = " A.D. 2026-Jul-10 12:00:00.0000"
+EC = 2.056371774294365e-1
+QR = 3.074963904913065e-1
+IN = 7.003376597981388e+0
+OM = 4.829761410521125e+1
+W = 2.920140382391587e+1
+Tp = 2.461266884955867e+6
+N = 4.092346911126485e+0
+MA = 2.172386586146031e+2
+TA = 2.054930195414291e+2
+A = 3.87098164408357e-1
+AD = 4.666999383254076e-1
+PR = 8.796908175629328e+1

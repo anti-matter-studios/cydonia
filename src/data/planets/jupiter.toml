@@ -1,0 +1,54 @@
+designation = "599"
+name = "Jupiter"
+
+[mesh]
+radius=0.2
+subdivisions=3
+seed=599
+shade-steps=5
+gradient-light="dbab7a"
+gradient-dark="734a33"
+
+[mesh.height]
+initialAmplitude=0
+scale=1
+octaves=1
+persistence=0.5
+lacunarity=2
+
+[orbit]
+epoch = 2461232
+eccentricity = 4.842990717218832e-2
+meanAnomaly = 105.1659616367267
+semiMajorAxis = 5.202384467190713
+orbitalPeriod = 4332.064405481086
+
+[orbit.units]
+time = "julian-date-barycentric-dynamical-time-days"
+distance = "astronomical-units"
+angle = "degrees"
+
+[orbit.angles]
+inclination = 1.303761434389124
+longitudeOfAscendingNode = 100.5212658617383
+argumentOfPerihelion = 273.568080147733
+
+[source]
+time = "2026-07-10T08:32:22.460342063"
+name = "NASA/JPL Horizons APIv1.2"
+
+[source.data]
+JD = 2.461232e+6
+UTC = " A.D. 2026-Jul-10 12:00:00.0000"
+EC = 4.842990717218832e-2
+QR = 4.950433470370632e+0
+IN = 1.303761434389124e+0
+OM = 1.005212658617383e+2
+W = 2.73568080147733e+2
+Tp = 2.459966484113682e+6
+N = 8.310125757699142e-2
+MA = 1.051659616367267e+2
+TA = 1.104313713802927e+2
+A = 5.202384467190713e+0
+AD = 5.454335464010794e+0
+PR = 4.332064405481086e+3

@@ -11,16 +11,8 @@ import tailwindcss from "eslint-plugin-tailwindcss";
 import tseslint from "typescript-eslint";
 
 const projectClassNames = [
-    "data-row",
-    "instrument-panel",
-    "marker-label",
-    "marker-light",
-    "orbit-ring",
-    "orbital-stage",
-    "panel-kicker",
-    "project-marker",
-    "solar-core",
-    "star-field"
+    "space",
+    "panel",
 ];
 
 export default tseslint.config(
@@ -58,7 +50,8 @@ export default tseslint.config(
         rules: {
             ...reactHooks.configs.recommended.rules,
             "@typescript-eslint/array-type": ["error", { default: "array-simple" }],
-            "@typescript-eslint/consistent-type-definitions": ["error", "type"],
+            "@typescript-eslint/no-invalid-void-type": ["off"],
+            "@typescript-eslint/consistent-type-definitions": ["error", "interface"],
             "@typescript-eslint/consistent-type-imports": [
                 "error",
                 { fixStyle: "inline-type-imports", prefer: "type-imports" }

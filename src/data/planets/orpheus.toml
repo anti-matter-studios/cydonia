@@ -1,0 +1,58 @@
+designation = "3361"
+name = "Orpheus"
+
+[mesh]
+radius=0.086
+subdivisions=4
+seed=3361
+shade-steps=5
+gradient-light="dca24a"
+gradient-dark="674016"
+
+[mesh.height]
+initialAmplitude=0.34
+scale=0.72
+octaves=16
+persistence=0.46
+lacunarity=2.3
+
+[rotation]
+tilt=18
+rate=3.2
+
+[orbit]
+epoch = 2461232
+eccentricity = 3.227712532541072e-1
+meanAnomaly = 132.0366433766353
+semiMajorAxis = 1.209488392575628
+orbitalPeriod = 485.848631835195
+
+[orbit.units]
+time = "julian-date-barycentric-dynamical-time-days"
+distance = "astronomical-units"
+angle = "degrees"
+
+[orbit.angles]
+inclination = 2.646500622255002
+longitudeOfAscendingNode = 188.2549371598098
+argumentOfPerihelion = 302.8584178435257
+
+[source]
+time = "2026-07-10T08:32:21.744341438"
+name = "NASA/JPL Horizons APIv1.2"
+
+[source.data]
+JD = 2.461232e+6
+UTC = " A.D. 2026-Jul-10 12:00:00.0000"
+EC = 3.227712532541072e-1
+QR = 8.191003083076968e-1
+IN = 2.646500622255002e+0
+OM = 1.882549371598098e+2
+W = 3.028584178435257e+2
+Tp = 2.461053806048509e+6
+N = 7.409715216036994e-1
+MA = 1.320366433766353e+2
+TA = 1.531717349072385e+2
+A = 1.209488392575628e+0
+AD = 1.599876476843559e+0
+PR = 4.85848631835195e+2

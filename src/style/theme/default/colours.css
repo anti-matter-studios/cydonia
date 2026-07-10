@@ -1,0 +1,69 @@
+/*
+ * Copyright © 2026 Anti-Matter Studios.
+ * This product is released under the MIT licence.
+ */
+
+@theme {
+    /* Base surfaces */
+    --color-space-50: hsl(120 14% 88%);
+    --color-space-100: hsl(120 12% 78%);
+    --color-space-200: hsl(120 10% 64%);
+    --color-space-300: hsl(120 9% 50%);
+    --color-space-400: hsl(120 8% 38%);
+    --color-space-500: hsl(120 8% 25%);
+    --color-space-600: hsl(120 8% 20%);
+    --color-space-700: hsl(120 8% 15%);
+    --color-space-800: hsl(120 8% 10%);
+    --color-space-900: hsl(120 8% 7%);
+    --color-space-950: hsl(120 8% 5%);
+
+    /* Semantic surfaces */
+    --color-background: var(--color-space-950);
+    --color-background-soft: var(--color-space-900);
+    --color-panel: hsl(120 8% 8%);
+    --color-panel-elevated: hsl(120 8% 11%);
+    --color-border-subtle: hsl(120 10% 22% / 0.45);
+    --color-border-default: hsl(120 10% 34% / 0.55);
+
+    /* Text */
+    --color-text-primary: hsl(72 24% 84%);
+    --color-text-secondary: hsl(78 18% 68%);
+    --color-text-muted: hsl(92 10% 48%);
+    --color-text-disabled: hsl(110 8% 34%);
+
+    /* Anti-Matter red accent */
+    --color-matter-50: hsl(2 92% 88%);
+    --color-matter-100: hsl(2 86% 78%);
+    --color-matter-200: hsl(2 80% 68%);
+    --color-matter-300: hsl(2 76% 60%);
+    --color-matter-400: hsl(2 72% 53%);
+    --color-matter-500: hsl(2 68% 47%);
+    --color-matter-600: hsl(2 62% 39%);
+    --color-matter-700: hsl(2 55% 30%);
+    --color-matter-800: hsl(2 45% 20%);
+    --color-matter-900: hsl(2 35% 13%);
+
+    /* Green operational accent */
+    --color-signal-50: hsl(116 42% 88%);
+    --color-signal-100: hsl(116 36% 78%);
+    --color-signal-200: hsl(116 32% 68%);
+    --color-signal-300: hsl(116 28% 58%);
+    --color-signal-400: hsl(116 25% 48%);
+    --color-signal-500: hsl(116 24% 38%);
+    --color-signal-600: hsl(116 22% 30%);
+    --color-signal-700: hsl(116 20% 23%);
+    --color-signal-800: hsl(116 18% 16%);
+    --color-signal-900: hsl(116 16% 10%);
+
+    /* Utility accents */
+    --color-warning: hsl(45 58% 68%);
+    --color-danger: var(--color-matter-300);
+    --color-success: var(--color-signal-200);
+    --color-info: hsl(185 28% 68%);
+
+    /* Surface colours */
+    --surface-canvas: var(--color-space-950);
+    --surface-canvas-highlight: var(--color-space-500);
+    --surface-panel: var(--color-space-900);
+    --surface-panel-hover: var(--color-space-800);
+}

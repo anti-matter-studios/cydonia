@@ -1,0 +1,54 @@
+designation = "299"
+name = "Venus"
+
+[mesh]
+radius=0.075
+subdivisions=3
+seed=299
+shade-steps=5
+gradient-light="edc478"
+gradient-dark="8c5c2e"
+
+[mesh.height]
+initialAmplitude=0
+scale=1
+octaves=1
+persistence=0.5
+lacunarity=2
+
+[orbit]
+epoch = 2461232
+eccentricity = 6.781357397441348e-3
+meanAnomaly = 90.37753233618284
+semiMajorAxis = 0.7233250171361285
+orbitalPeriod = 224.6974399156253
+
+[orbit.units]
+time = "julian-date-barycentric-dynamical-time-days"
+distance = "astronomical-units"
+angle = "degrees"
+
+[orbit.angles]
+inclination = 3.394372009135278
+longitudeOfAscendingNode = 76.6065468687392
+argumentOfPerihelion = 54.83433267125654
+
+[source]
+time = "2026-07-10T08:32:22.76834246"
+name = "NASA/JPL Horizons APIv1.2"
+
+[source.data]
+JD = 2.461232e+6
+UTC = " A.D. 2026-Jul-10 12:00:00.0000"
+EC = 6.781357397441348e-3
+QR = 7.18419891680418e-1
+IN = 3.394372009135278e+0
+OM = 7.66065468687392e+1
+W = 5.483433267125654e+1
+Tp = 2.461175589999606e+6
+N = 1.6021544354719e+0
+MA = 9.037753233618284e+1
+TA = 9.115453456647128e+1
+A = 7.233250171361285e-1
+AD = 7.282301425918389e-1
+PR = 2.246974399156253e+2

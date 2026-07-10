@@ -1,0 +1,58 @@
+designation = "1020"
+name = "Arcadia"
+
+[mesh]
+radius=0.112
+subdivisions=4
+seed=1020
+shade-steps=5
+gradient-light="9ade72"
+gradient-dark="245936"
+
+[mesh.height]
+initialAmplitude=0.24
+scale=0.62
+octaves=12
+persistence=0.52
+lacunarity=2.15
+
+[rotation]
+tilt=9
+rate=2.4
+
+[orbit]
+epoch = 2461232
+eccentricity = 4.023797476337038e-2
+meanAnomaly = 300.4270617485379
+semiMajorAxis = 2.791091413452185
+orbitalPeriod = 1703.175957626077
+
+[orbit.units]
+time = "julian-date-barycentric-dynamical-time-days"
+distance = "astronomical-units"
+angle = "degrees"
+
+[orbit.angles]
+inclination = 4.060967666989394
+longitudeOfAscendingNode = 180.4771968585622
+argumentOfPerihelion = 36.73526842812402
+
+[source]
+time = "2026-07-10T08:32:22.063341744"
+name = "NASA/JPL Horizons APIv1.2"
+
+[source.data]
+JD = 2.461232e+6
+UTC = " A.D. 2026-Jul-10 12:00:00.0000"
+EC = 4.023797476337038e-2
+QR = 2.678783547595436e+0
+IN = 4.060967666989394e+0
+OM = 1.804771968585622e+2
+W = 3.673526842812402e+1
+Tp = 2.461513842211542e+6
+N = 2.11369822588252e-1
+MA = 3.004270617485379e+2
+TA = 2.963508126534052e+2
+A = 2.791091413452185e+0
+AD = 2.903399279308934e+0
+PR = 1.703175957626077e+3

@@ -5,7 +5,7 @@
 
 import type { Preview } from "@storybook/react-vite";
 
-import "../src/style/index.css";
+import "@/style/index.css";
 
 
 const preview: Preview = {};

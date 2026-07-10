@@ -1,0 +1,15 @@
+/*
+ * Copyright © 2026 Anti-Matter Studios.
+ * This product is released under the MIT licence.
+ */
+
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap");
+
+@layer theme {
+
+    @theme {
+        --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+        --font-sans: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+    }
+}
+
