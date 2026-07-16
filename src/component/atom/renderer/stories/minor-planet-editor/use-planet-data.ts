@@ -59,7 +59,7 @@ export function usePlanetData(props: MinorPlanetEditorProps): PlanetData {
             orbit: {
                 angles: {
                     inclination: brand(props.inclination),
-                    argumentOfPerihelion: brand(props.argumentOfPerihelion),
+                    argumentOfPeriapsis: brand(props.argumentOfPeriapsis),
                     longitudeOfAscendingNode: brand(props.longitudeOfAscendingNode)
                 },
                 orbitalPeriod: props.orbitalPeriod,

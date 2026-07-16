@@ -129,8 +129,8 @@ MinorPlanetEditorMeta.argTypes = {
         control: { type: "number", min: 0, step: 0.1 },
         table: { category: "Orbit" }
     },
-    argumentOfPerihelion: {
-        name: "Argument Of Perihelion",
+    argumentOfPeriapsis: {
+        name: "Argument Of Periapsis",
         control: { type: "number", min: 0, step: 0.1 },
         table: { category: "Orbit" }
     },
@@ -172,7 +172,7 @@ export const CydoniaStory: StoryObj<MinorPlanetEditorProps> = {
 
         inclination: 13.04695520518346,
         longitudeOfAscendingNode: 327.9991971677421,
-        argumentOfPerihelion: 231.6372070055021,
+        argumentOfPeriapsis: 231.6372070055021,
         orbitalPeriod: brand(1529.493526766819),
         eccentricity: 1.240443478695231e-1,
 
@@ -207,7 +207,7 @@ export const EarthStory: StoryObj<MinorPlanetEditorProps> = {
 
         inclination: 0.004390023352082882,
         longitudeOfAscendingNode: 150.4669474031134,
-        argumentOfPerihelion: 313.8112358650934,
+        argumentOfPeriapsis: 313.8112358650934,
         orbitalPeriod: brand(365.155516058647),
         eccentricity: 1.683111526740723e-2,
 

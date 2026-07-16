@@ -25,6 +25,7 @@ const config: StorybookConfig = {
         return mergeConfig<typeof config, typeof config>(
             config,
             {
+                base: "/storybook",
                 server: {
                     ws: {
                         port: 443

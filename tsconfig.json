@@ -34,5 +34,5 @@
         "src/**/*.tsx",
         "vite.config.ts"
     ],
-    "exclude": ["node_modules", "tmp"]
+    "exclude": ["node_modules", "tmp", "src/scripts/generate.old/**"]
 }

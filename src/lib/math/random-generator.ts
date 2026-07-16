@@ -4,7 +4,6 @@
  */
 
 
-const DEFAULT_RANDOM_GENERATOR_SEED = 1;
 const FNV_OFFSET_BASIS = 0x811c9dc5;
 const FNV_PRIME = 0x01000193;
 const SEED_STEP = 0x9e3779b9;
@@ -15,29 +14,37 @@ export type RandomGeneratorSeed = number | string;
 
 /** Callable SFC32-backed pseudo-random number generator. */
 export interface RandomGenerator {
-    /** Samples the next value in the `[0, 1)` range. */
-    (): number;
-
     /** The pseudo-random number generator algorithm. */
     readonly algorithm: "sfc32";
 
     /** Seed used to initialise the generator state. */
     readonly seed: RandomGeneratorSeed;
 
+    /**
+     * Samples the next value in the `[0, 1)` range.
+     *
+     * This is an alias for {@link RandomGenerator.next}.
+     */
+    (this: void): number;
+
     /** Samples the next value in the `[0, 1)` range. */
-    readonly next: () => number;
+    next(this: void): number;
 
     /** Samples the next unsigned 32-bit integer. */
-    readonly nextUint32: () => number;
+    nextUint32(this: void): number;
+
+    /** Samples the next value in the provided range. */
+    nextRange(this: void, min: number, max: number): number;
 }
 
 /**
  * Creates a callable SFC32-backed pseudo-random number generator.
  *
  * @param seed The seed used to initialise the generator state.
+ *             If not provided, one will be generated with {@link Math.random}.
  * @returns A callable random generator object.
  */
-export function createRandomGenerator(seed: RandomGeneratorSeed = DEFAULT_RANDOM_GENERATOR_SEED): RandomGenerator {
+export function createRandomGenerator(seed: RandomGeneratorSeed = Math.random() * 0xFFFFFFFF): RandomGenerator {
     let [a, b, c, d] = createInitialState(seed);
 
     function nextUint32(): number {
@@ -56,24 +63,19 @@ export function createRandomGenerator(seed: RandomGeneratorSeed = DEFAULT_RANDOM
         return nextUint32() / UINT32_RANGE;
     }
 
-    return Object.defineProperties(random, {
-        algorithm: {
-            enumerable: true,
-            value: "sfc32"
+    return Object.assign(random, {
+        get algorithm(): "sfc32" {
+            return "sfc32";
         },
-        next: {
-            enumerable: true,
-            value: random
+        get seed() {
+            return seed;
         },
-        nextUint32: {
-            enumerable: true,
-            value: nextUint32
-        },
-        seed: {
-            enumerable: true,
-            value: seed
+        next: random,
+        nextUint32,
+        nextRange(min: number, max: number) {
+            return random() * (max - min) + min;
         }
-    }) as RandomGenerator;
+    });
 }
 
 function createInitialState(seed: RandomGeneratorSeed): [number, number, number, number] {
