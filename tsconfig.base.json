@@ -1,0 +1,33 @@
+{
+    "compileOnSave": false,
+    "compilerOptions": {
+        "allowSyntheticDefaultImports": true,
+        "declaration": true,
+        "declarationMap": true,
+        "emitDecoratorMetadata": true,
+        "esModuleInterop": true,
+        "exactOptionalPropertyTypes": true,
+        "experimentalDecorators": true,
+        "importHelpers": true,
+        "jsx": "react-jsx",
+        "lib": ["ESNext", "DOM"],
+        "module": "ESNext",
+        "moduleResolution": "bundler",
+        "noEmit": true,
+        "noFallthroughCasesInSwitch": true,
+        "noImplicitOverride": true,
+        "noImplicitReturns": true,
+        "noPropertyAccessFromIndexSignature": true,
+        "noUncheckedIndexedAccess": true,
+        "paths": {},
+        "resolveJsonModule": true,
+        "skipDefaultLibCheck": true,
+        "skipLibCheck": true,
+        "sourceMap": true,
+        "strict": true,
+        "target": "ESNext",
+        "useUnknownInCatchVariables": true
+    },
+    "include": [],
+    "exclude": ["node_modules", "tmp"]
+}

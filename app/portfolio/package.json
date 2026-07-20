@@ -1,0 +1,27 @@
+{
+    "name": "@cydonia/portfolio",
+    "version": "2026.1.1",
+    "private": true,
+    "description": "Portfolio application used to list all the Anti-Matter Studio projects.",
+    "type": "module",
+    "exports": null,
+    "scripts": {
+        "build": "vite build",
+        "lint": "eslint src --max-warnings=0"
+    },
+    "dependencies": {
+        "@anti-matter-studios/ui": "workspace:*",
+        "react": "catalog:react",
+        "react-dom": "catalog:react"
+    },
+    "devDependencies": {
+        "@types/bun": "catalog:types",
+        "@types/node": "catalog:types",
+        "@types/react": "catalog:types",
+        "@types/react-dom": "catalog:types",
+        "eslint": "catalog:lint",
+        "tailwindcss": "catalog:build",
+        "vite": "catalog:build",
+        "vitest": "catalog:test"
+    }
+}

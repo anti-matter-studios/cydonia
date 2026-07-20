@@ -1,0 +1,11 @@
+{
+    "extends": "./tsconfig.json",
+    "compilerOptions": {
+        "composite": true,
+        "tsBuildInfoFile": "dist/.tsbuildinfo",
+        "noEmit": false,
+        "types": ["node", "bun", "vite/client"]
+    },
+    "exclude": ["src/**/*.spec.ts", "src/**/*.tets.ts"],
+    "include": ["src/**/*.ts"]
+}

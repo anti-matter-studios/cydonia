@@ -1,0 +1,28 @@
+{
+    "name": "@anti-matter-studios/ui",
+    "version": "2026.1.1",
+    "private": true,
+    "description": "Portfolio application used to list all the Anti-Matter Studio projects.",
+    "type": "module",
+    "exports": {
+        "./styles": "./dist/assets/styles.css"
+    },
+    "scripts": {
+        "build": "vite build",
+        "lint": "eslint src --max-warnings=0"
+    },
+    "dependencies": {
+        "react": "catalog:react",
+        "react-dom": "catalog:react",
+        "tailwindcss": "catalog:build"
+    },
+    "devDependencies": {
+        "@types/bun": "catalog:types",
+        "@types/node": "catalog:types",
+        "@types/react": "catalog:types",
+        "@types/react-dom": "catalog:types",
+        "eslint": "catalog:lint",
+        "vite": "catalog:build",
+        "vitest": "catalog:test"
+    }
+}
