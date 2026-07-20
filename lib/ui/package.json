@@ -5,10 +5,15 @@
     "description": "Portfolio application used to list all the Anti-Matter Studio projects.",
     "type": "module",
     "exports": {
-        "./styles": "./dist/assets/styles.css"
+        "./styles": {
+            "types": "./dist/index.d.ts",
+            "default": "./dist/assets/styles.css"
+        }
     },
     "scripts": {
-        "build": "vite build",
+        "build": "bun run --sequential build:vite build:declarations",
+        "build:declarations": "tsc --project tsconfig.lib.json",
+        "build:vite": "vite build",
         "lint": "eslint src --max-warnings=0"
     },
     "dependencies": {
@@ -17,10 +22,12 @@
         "tailwindcss": "catalog:build"
     },
     "devDependencies": {
+        "@anti-matter-studios/toolchain": "workspace:*",
         "@types/bun": "catalog:types",
         "@types/node": "catalog:types",
         "@types/react": "catalog:types",
         "@types/react-dom": "catalog:types",
+        "typescript":"catalog:build",
         "eslint": "catalog:lint",
         "vite": "catalog:build",
         "vitest": "catalog:test"

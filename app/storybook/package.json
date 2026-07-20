@@ -1,26 +1,29 @@
 {
-    "name": "@cydonia/portfolio",
+    "name": "@cydonia/storybook",
     "version": "2026.1.1",
     "private": true,
-    "description": "Portfolio application used to list all the Anti-Matter Studio projects.",
+    "description": "Storybook of all the UI components of Cydonia.",
     "type": "module",
     "exports": null,
     "scripts": {
-        "build": "vite build",
-        "lint": "eslint src --max-warnings=0"
+        "build": "storybook build",
+        "lint": "eslint src --max-warnings=0",
+        "storybook": "storybook dev --no-open --exact-port --port 10102"
     },
     "dependencies": {
         "@anti-matter-studios/ui": "workspace:*",
+        "@cydonia/portfolio": "workspace:*",
         "react": "catalog:react",
         "react-dom": "catalog:react"
     },
     "devDependencies": {
-        "@storybook/react": "10.5.2",
+        "@storybook/react-vite": "10.5.2",
         "@types/bun": "catalog:types",
         "@types/node": "catalog:types",
         "@types/react": "catalog:types",
         "@types/react-dom": "catalog:types",
         "eslint": "catalog:lint",
+        "storybook": "10.5.2",
         "tailwindcss": "catalog:build",
         "vite": "catalog:build",
         "vitest": "catalog:test"
