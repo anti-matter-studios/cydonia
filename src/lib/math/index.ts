@@ -5,6 +5,7 @@
 
 
 export * from "./angle";
+export * from "./colour";
 export * from "./ease";
 export * from "./noise";
 export * from "./random-generator";

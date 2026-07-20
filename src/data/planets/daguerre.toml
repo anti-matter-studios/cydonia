@@ -1,0 +1,60 @@
+designation = "3256"
+name = "Daguerre"
+
+[mesh]
+radius=0.096
+subdivisions=4
+seed=3256
+shade-steps=5
+specular-light="eeeeff"
+specular-threshold=0.9
+gradient-light="b88cff"
+gradient-dark="3a235f"
+
+[mesh.height]
+initialAmplitude=0.27
+scale=0.58
+octaves=14
+persistence=0.49
+lacunarity=2.05
+
+[rotation]
+tilt=23
+rate=1.7
+
+[orbit]
+epoch = 2461238
+eccentricity = 0.09705848472393563
+meanAnomaly = 184.140206561603
+semiMajorAxis = 2.778728150514385
+orbitalPeriod = 1691.87205864142
+
+[orbit.units]
+time = "julian-date-barycentric-dynamical-time-days"
+distance = "astronomical-units"
+angle = "degrees"
+
+[orbit.angles]
+inclination = 7.832116844994959
+longitudeOfAscendingNode = 174.2166112480533
+argumentOfPeriapsis = 266.7822941670898
+
+[source]
+time = "2026-07-16T07:50:52.813Z"
+name = "NASA/JPL Horizons APIv1.2"
+
+[source.data]
+JD = 2.461238e+6
+TDB = "A.D. 2026-Jul-16 12:00:00.0000"
+EC = 9.705848472393563e-2
+QR = 2.509029006765714e+0
+IN = 7.832116844994959e+0
+OM = 1.742166112480533e+2
+W = 2.667822941670898e+2
+Tp = 2.46206447852988e+6
+N = 2.127820470592094e-1
+MA = 1.84140206561603e+2
+TA = 1.834242283052268e+2
+A = 2.778728150514385e+0
+AD = 3.048427294263055e+0
+PR = 1.69187205864142e+3

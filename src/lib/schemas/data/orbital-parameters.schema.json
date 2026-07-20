@@ -14,7 +14,7 @@
                 },
                 "distance": {
                     "type": "string",
-                    "enum": ["astronomical-units"],
+                    "enum": ["astronomical-units", "kilometers"],
                     "description": "The unit used for distance measurements in the orbital parameters."
                 },
                 "angle": {
@@ -38,13 +38,13 @@
                     "type": "number",
                     "description": "The longitude of the ascending node of the orbit."
                 },
-                "argumentOfPerihelion": {
+                "argumentOfPeriapsis": {
                     "type": "number",
-                    "description": "The argument of perihelion of the orbit."
+                    "description": "The argument of periapsis of the orbit."
                 }
             },
             "additionalProperties": false,
-            "required": ["inclination", "longitudeOfAscendingNode", "argumentOfPerihelion"]
+            "required": ["inclination", "longitudeOfAscendingNode", "argumentOfPeriapsis"]
         }
     },
     "type": "object",
@@ -82,7 +82,9 @@
     },
     "additionalProperties": false,
     "required": [
+        "units",
         "epoch",
+        "meanAnomaly",
         "angles",
         "eccentricity",
         "semiMajorAxis",

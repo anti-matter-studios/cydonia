@@ -16,13 +16,12 @@ octaves=1
 persistence=0.5
 lacunarity=2
 
-
 [orbit]
-epoch = 2461232
-eccentricity = 9.3426214900535e-2
-meanAnomaly = 55.66946463277381
-semiMajorAxis = 1.523594081182733
-orbitalPeriod = 686.9138485592362
+epoch = 2461238
+eccentricity = 0.09342604242301603
+meanAnomaly = 58.81350842482728
+semiMajorAxis = 1.52359506248562
+orbitalPeriod = 686.9145121913608
 
 [orbit.units]
 time = "julian-date-barycentric-dynamical-time-days"
@@ -30,26 +29,26 @@ distance = "astronomical-units"
 angle = "degrees"
 
 [orbit.angles]
-inclination = 1.84748459909088
-longitudeOfAscendingNode = 49.48120399453644
-argumentOfPerihelion = 286.608234145525
+inclination = 1.8474834837133
+longitudeOfAscendingNode = 49.48120799602232
+argumentOfPeriapsis = 286.608743039811
 
 [source]
-time = "2026-07-10T08:32:20.836340515"
+time = "2026-07-16T07:50:53.176Z"
 name = "NASA/JPL Horizons APIv1.2"
 
 [source.data]
-JD = 2.461232e+6
-UTC = " A.D. 2026-Jul-10 12:00:00.0000"
-EC = 9.3426214900535e-2
-QR = 1.381250453132972e+0
-IN = 1.84748459909088e+0
-OM = 4.948120399453644e+1
-W = 2.86608234145525e+2
-Tp = 2.461125777427227e+6
-N = 5.240831885324194e-1
-MA = 5.566946463277381e+1
-TA = 6.508881450529702e+1
-A = 1.523594081182733e+0
-AD = 1.665937709232495e+0
-PR = 6.869138485592362e+2
+JD = 2.461238e+6
+TDB = "A.D. 2026-Jul-16 12:00:00.0000"
+EC = 9.342604242301603e-2
+QR = 1.381251605542342e+0
+IN = 1.8474834837133e+0
+OM = 4.948120799602232e+1
+W = 2.86608743039811e+2
+Tp = 2.461125778187639e+6
+N = 5.240826822125881e-1
+MA = 5.881350842482728e+1
+TA = 6.851319850573225e+1
+A = 1.52359506248562e+0
+AD = 1.6659385194289e+0
+PR = 6.869145121913608e+2

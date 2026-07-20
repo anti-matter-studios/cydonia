@@ -85,15 +85,15 @@ export function getOrbitPerifocalToWorldQuaternion(
         angles.inclination
     );
 
-    const argumentOfPerihelionQuaternion = new Quaternion();
-    argumentOfPerihelionQuaternion.setFromAxisAngle(
+    const argumentOfPeriapsisQuaternion = new Quaternion();
+    argumentOfPeriapsisQuaternion.setFromAxisAngle(
         new Vector3(0, 0, 1),
-        angles.argumentOfPerihelion
+        angles.argumentOfPeriapsis
     );
 
     return longitudeOfAscendingNodeQuaternion
         .multiply(inclinationQuaternion)
-        .multiply(argumentOfPerihelionQuaternion);
+        .multiply(argumentOfPeriapsisQuaternion);
 }
 
 /**

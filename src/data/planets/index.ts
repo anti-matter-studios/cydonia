@@ -15,7 +15,7 @@ import UranusData from "./uranus.toml";
 import NeptuneData from "./neptune.toml";
 import PlutoData from "./pluto.toml";
 import ArcadiaData from "./arcadia.toml";
-import DesdemonaData from "./desdemona.toml";
+import DaguerreData from "./daguerre.toml";
 import NortiaData from "./nortia.toml";
 import OrpheusData from "./orpheus.toml";
 import MoritakumiData from "./moritakumi.toml";
@@ -34,7 +34,7 @@ export const Neptune = NeptuneData as PlanetData;
 export const Pluto = PlutoData as PlanetData;
 
 export const Arcadia = ArcadiaData as PlanetData;
-export const Desdemona = DesdemonaData as PlanetData;
+export const Daguerre = DaguerreData as PlanetData;
 export const Nortia = NortiaData as PlanetData;
 export const Orpheus = OrpheusData as PlanetData;
 export const Moritakumi = MoritakumiData as PlanetData;
@@ -46,7 +46,7 @@ export const AllMajorPlanets = [
 ] as const;
 
 export const AllMinorPlanets = [
-    Arcadia, Desdemona, Nortia, Orpheus, Moritakumi, Ganymede, Cydonia
+    Arcadia, Daguerre, Nortia, Orpheus, Moritakumi, Ganymede, Cydonia
 ] as const;
 
 export const AllPlanets = [

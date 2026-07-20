@@ -60,7 +60,7 @@ export interface OrbitalParameterUnits<
     angle: Angle;
 }
 
-/** Inclination, ascending note, and argument of perhilion angles of this record. */
+/** Inclination, ascending node, and argument of periapsis angles of this record. */
 export interface OrbitalParameterAngles<T extends Angle> {
     /** The inclination (i) of the orbit. */
     inclination: T;
@@ -68,8 +68,8 @@ export interface OrbitalParameterAngles<T extends Angle> {
     /** The longitude of the ascending node (Ω). */
     longitudeOfAscendingNode: T;
 
-    /** The argument of perihelion (ω). */
-    argumentOfPerihelion: T;
+    /** The argument of periapsis (ω). */
+    argumentOfPeriapsis: T;
 }
 
 /**
@@ -84,7 +84,7 @@ export function convertRadiansOrbitalParameterAnglesToDegrees(
     return {
         inclination: radiansToDegrees(angles.inclination),
         longitudeOfAscendingNode: radiansToDegrees(angles.longitudeOfAscendingNode),
-        argumentOfPerihelion: radiansToDegrees(angles.argumentOfPerihelion),
+        argumentOfPeriapsis: radiansToDegrees(angles.argumentOfPeriapsis),
     }
 }
 
@@ -100,7 +100,7 @@ export function convertDegreesOrbitalParameterAnglesToRadians(
     return {
         inclination: degreesToRadians(angles.inclination),
         longitudeOfAscendingNode: degreesToRadians(angles.longitudeOfAscendingNode),
-        argumentOfPerihelion: degreesToRadians(angles.argumentOfPerihelion),
+        argumentOfPeriapsis: degreesToRadians(angles.argumentOfPeriapsis),
     }
 }
 

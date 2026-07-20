@@ -53,7 +53,9 @@
                     "type": "object",
                     "description": "The data retrieved from the source."
                 }
-            }
+            },
+            "additionalProperties": false,
+            "required": ["time", "name", "data"]
         }
     },
     "additionalProperties": false,

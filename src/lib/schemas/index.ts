@@ -4,4 +4,5 @@
  */
 
 
-export * from "./data/index.js";
+export * from "./data/index";
+export * from "./ajv";

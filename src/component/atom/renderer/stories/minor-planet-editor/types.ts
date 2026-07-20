@@ -32,7 +32,7 @@ export interface MinorPlanetEditorProps {
 
     inclination: number;
     longitudeOfAscendingNode: number;
-    argumentOfPerihelion: number;
+    argumentOfPeriapsis: number;
     orbitalPeriod: DurationDays;
     eccentricity: number;
 
