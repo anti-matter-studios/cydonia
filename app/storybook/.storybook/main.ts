@@ -3,10 +3,9 @@
  * This product is released under the MIT licence.
  */
 
-import { resolve } from "node:path";
-import { fileURLToPath } from "node:url";
 import type { StorybookConfig } from "@storybook/react-vite";
 import { mergeConfig } from "vite";
+import defineViteConfig from "@anti-matter-studios/toolchain/vite";
 
 const config: StorybookConfig = {
     stories: [
@@ -27,9 +26,13 @@ const config: StorybookConfig = {
         options: {},
     },
     viteFinal(config) {
-        return mergeConfig<typeof config, typeof config>(config, {
-            server: { ws: { port: 443 } },
-        });
+        return mergeConfig(
+            config,
+            defineViteConfig({
+                base: "/storybook",
+                server: { ws: { port: 443 } },
+            }),
+        );
     },
 };
 

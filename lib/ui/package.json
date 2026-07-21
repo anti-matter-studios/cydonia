@@ -6,6 +6,7 @@
     "type": "module",
     "exports": {
         "./styles": {
+            "source": "./src/index.css",
             "types": "./dist/index.d.ts",
             "default": "./dist/assets/styles.css"
         }
@@ -27,8 +28,8 @@
         "@types/node": "catalog:types",
         "@types/react": "catalog:types",
         "@types/react-dom": "catalog:types",
-        "typescript":"catalog:build",
         "eslint": "catalog:lint",
+        "typescript": "catalog:build",
         "vite": "catalog:build",
         "vitest": "catalog:test"
     }

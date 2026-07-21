@@ -3,4 +3,7 @@
  * This product is released under the MIT licence.
  */
 
-export {};
+import "./index.css";
+
+const test = true;
+export { test };

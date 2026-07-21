@@ -2,8 +2,7 @@
     "extends": "../../tsconfig.base.json",
     "compilerOptions": {
         "rootDir": "src",
-        "outDir": "dist",
-        "types": ["node", "bun"]
+        "outDir": "dist"
     },
     "include": [],
     "references": [{ "path": "./tsconfig.app.json" }, { "path": "./tsconfig.spec.json" }]

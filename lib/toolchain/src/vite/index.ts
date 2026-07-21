@@ -6,6 +6,7 @@
 import { type ViteUserConfig, mergeConfig } from "vitest/config";
 import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
+import { defaultClientConditions } from "vite";
 
 /**
  * Defines the Vite configuration used in the project.
@@ -21,6 +22,9 @@ export function defineDefaultViteConfig(): ViteUserConfig {
     return {
         appType: "spa",
         clearScreen: false,
+        resolve: {
+            conditions: ["source", ...defaultClientConditions],
+        },
         build: {
             reportCompressedSize: true,
             chunkSizeWarningLimit: 250,
